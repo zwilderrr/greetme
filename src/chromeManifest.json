@@ -1,9 +1,20 @@
 {
   "manifest_version": 2,
-  "name": "greetme",
-  "version": "0.0.1",
+  "name": "greetme - gorgeous photos you'll love",
+  "short_name": "greetme",
+  "description": "Stunning pictures, each and every tab.",
+  "version": "0.0.3",
   "chrome_url_overrides": {
     "newtab": "index.html"
+  },
+  "icons": {
+    "16": "/media/gm-icon-16",
+    "32": "/media/gm-icon-32",
+    "48": "/media/gm-icon-48",
+    "128": "/media/gm-icon-128"
+  },
+  "browser_action": {
+    "default_icon": "/media/gm-icon-16"
   },
   "permissions": ["tabs", "storage"],
   "content_security_policy": "script-src 'self' 'sha256-F61Itel0ZBdQI+q8Sge+7F0R739EX8Kee1TJxIR9RoY='; object-src 'self'"
