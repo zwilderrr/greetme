@@ -17,6 +17,12 @@
   top: 52vh;
 }
 
+.content-wrapper-with-goals {
+  left: 50%;
+  position: absolute;
+  top: 35vh;
+}
+
 .content {
   position: relative;
   left: -50%;
@@ -30,6 +36,14 @@
 
 .fade-in {
   animation: fade-in .3s ease-in-out;
+}
+
+.fade-in-again {
+  animation: fade-in .3s ease-in-out;
+}
+
+.goals-container {
+  font-size: 1.5vw;
 }
 
 .loading-screen-text {

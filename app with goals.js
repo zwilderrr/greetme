@@ -1,13 +1,15 @@
 /* eslint-disable */
 
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import * as moment from "moment";
-import { Input, Icon, Drawer } from "@material-ui/core";
+import { Input, Icon, Drawer, InputAdornment } from "@material-ui/core";
 import "./App.css";
 import { PinOutlined, PinFilled } from "./pinIcons";
 import BackgroundImage from "./BackgroundImage";
 
 import { fetchImage, sendDownloadRequest, getErrorImage } from "./API";
+
+const GOAL_TIME_LINES = ["today", "this week", "this month"];
 
 class App extends Component {
   constructor(props) {
@@ -19,9 +21,11 @@ class App extends Component {
       showTime: true,
       showName: true,
       showStandardTime: true,
-      showGoals: true,
       showZoom: false,
       showNotes: false,
+      showGoals: true,
+      goalWidth: "18vw",
+      goalTimelineIndex: 0,
       imageQuery: "",
       savedBackground: false,
       backgroundImage: "",
@@ -31,11 +35,16 @@ class App extends Component {
 
     this.clockInterval = undefined;
     this.notesInterval = undefined;
-    this.notesBodyRef = React.createRef();
+    this.goalOneRef = React.createRef();
+    this.goalOneHidden = React.createRef();
+    this.goalTwoHidden = React.createRef();
+    this.goalTwoRef = React.createRef();
+    this.goalPlaceholderRef = React.createRef();
   }
 
   componentDidMount = async () => {
     chrome.storage.sync.get(null, res => {
+      console.log("initial res", res);
       const nextState = { shouldFetchImage: true };
       Object.keys(res).forEach(k => (nextState[k] = res[k]));
 
@@ -149,7 +158,7 @@ class App extends Component {
   };
 
   handleDrawerOpen = () => {
-    // onBlur event is not called when closing the screen,
+    // not ideal, but the onBlur event is not called when closing the screen,
     // and for a lot of typing, setStorage limits will be exceeded
     this.onUpdateField({ showNotes: true });
     this.notesInterval = setInterval(() => {
@@ -180,6 +189,48 @@ class App extends Component {
     }
   };
 
+  handleGoalsEnter = () => {
+    this.setState({ showGoalTwo: true });
+  };
+
+  handleGoalsLeave = () => {
+    if (this.state.goalTwoFixed) {
+      return;
+    }
+    this.setState({ showGoalTwo: false });
+  };
+
+  handleInputClick = () => {
+    this.setState({ goalTwoFixed: true });
+    this.setGoalWidth();
+  };
+
+  setGoalWidth = (onBlur = false) => {
+    const windowWidth = window.innerWidth;
+    let inputWidthInVW;
+    let inputWidth;
+    let placeholderWidth = 18;
+    let goalOneWidth = this.goalOneHidden.current
+      ? this.goalOneHidden.current.offsetWidth
+      : 0;
+    let goalTwoWidth = this.goalTwoHidden.current
+      ? this.goalTwoHidden.current.offsetWidth
+      : 0;
+
+    let widestGoal = Math.max(goalOneWidth, goalTwoWidth);
+
+    if (widestGoal) {
+      inputWidthInVW = Math.ceil((widestGoal / windowWidth) * 100);
+      if (onBlur || inputWidthInVW > placeholderWidth) {
+        inputWidth = inputWidthInVW + 2;
+      } else {
+        inputWidth = placeholderWidth;
+      }
+    }
+
+    this.onUpdateField({ goalWidth: `${inputWidth}vw` });
+  };
+
   render() {
     const {
       backgroundImage,
@@ -200,10 +251,17 @@ class App extends Component {
       showZoom,
       showNotes,
       showGoals,
+      goalOne,
+      goalTwo,
+      goalOneCompleted,
+      goalTwoCompleted,
+      showGoalTwo,
+      goalWidth,
       imageLoading,
       loadedImage,
       monospace
     } = this.state;
+    let { goalTimelineIndex } = this.state;
 
     // prevent a fetch on every render
     if (!savedBackground && shouldFetchImage) {
@@ -217,6 +275,8 @@ class App extends Component {
     }
 
     const backgroundLoading = imageLoading || !backgroundImage;
+    const goalTimeline = GOAL_TIME_LINES[goalTimelineIndex];
+    const goalTwoVisible = goalTwo || showGoalTwo;
 
     return (
       <div
@@ -281,6 +341,7 @@ class App extends Component {
               onChange={e => this.setState({ imageQuery: e.target.value })}
               onKeyUp={async e => {
                 e.key === "Enter" && this.getImage();
+                this.onUpdateField({ imageQuery });
               }}
               inputProps={{ maxLength: 30 }}
             />
@@ -326,11 +387,7 @@ class App extends Component {
               fly
             </div>
           </div>
-          <div
-            className={`fade-in ${
-              showGoals ? "content-wrapper-with-goals" : "content-wrapper"
-            }`}
-          >
+          <div className="content-wrapper" style={{ top: showGoals && "35vh" }}>
             <div className="content">
               {showTime ? (
                 <div className="time fade-in">{time}</div>
@@ -352,29 +409,135 @@ class App extends Component {
                   }
                   classes={{ input: "name" }}
                   fullWidth={true}
-                  inputProps={{
-                    maxLength: 30,
-                    onKeyUp: e => {
-                      if (e.key === "Enter") {
-                        e.target.blur();
-                        this.setState({ editing: false }, () =>
-                          this.onUpdateField({ name })
-                        );
-                      }
-                    }
-                  }}
+                  inputProps={{ maxLength: 30 }}
                 />
               )}
+
               {showGoals && (
-                <div className="goals-container">
-                  <div className="goal-timeline-wrapper">
-                    <div className="goals">
-                      <div className="goal">
-                        <div className="goal-one">goal one</div>
-                      </div>
-                      <div className="goal">
-                        <div className="goal-two">goal two</div>
-                      </div>
+                <div
+                  className="goals-container fade-in"
+                  onMouseEnter={this.handleGoalsEnter}
+                  onMouseLeave={this.handleGoalsLeave}
+                >
+                  <div
+                    className="goal-timeline"
+                    style={{ width: goalTimelineIndex < 1 ? "5vw" : "8vw" }}
+                    // onClick={() => {
+                    //   goalTimelineIndex =
+                    //     goalTimelineIndex == 2 ? 0 : (goalTimelineIndex += 1);
+                    //   this.onUpdateField({ goalTimelineIndex });
+                    // }}
+                  >
+                    <Input
+                      disableUnderline={true}
+                      disabled={true}
+                      value={goalTimeline}
+                    />
+                  </div>
+
+                  <div>
+                    {/* goal one */}
+                    <div className="goal">
+                      <span className="hidden-goal" ref={this.goalOneHidden}>
+                        {goalOne}
+                      </span>
+                      <Input
+                        startAdornment={
+                          <span
+                            className={!goalOne && "goal-checkbox-dim"}
+                            onClick={e => {
+                              if (!goalOne) {
+                                e.stopPropagation();
+                                return;
+                              }
+                              this.onUpdateField({
+                                goalOneCompleted: !goalOneCompleted
+                              });
+                            }}
+                          >
+                            <InputAdornment position="start">
+                              {goalOneCompleted ? (
+                                <Icon>check_circle_outline</Icon>
+                              ) : (
+                                <Icon>radio_button_unchecked</Icon>
+                              )}
+                            </InputAdornment>
+                          </span>
+                        }
+                        disabled={goalOneCompleted}
+                        disableUnderline={true}
+                        value={goalOne}
+                        placeholder="What are you striving for?"
+                        onChange={e =>
+                          this.setState({ goalOne: e.target.value })
+                        }
+                        onKeyUp={() => this.setGoalWidth()}
+                        inputProps={{
+                          className: goalOneCompleted && "goal-completed",
+                          style: { width: goalWidth },
+                          onClick: () => this.handleInputClick(),
+                          onBlur: () => {
+                            this.setState({ goalTwoFixed: false });
+                            this.setGoalWidth(true);
+                            this.onUpdateField({ goalOne });
+                          }
+                        }}
+                      />
+                    </div>
+
+                    {/* goal two */}
+                    <div
+                      className={`goal goal-two ${goalTwoVisible && "fade-in"}`}
+                      style={{
+                        visibility: goalTwoVisible && "visible"
+                      }}
+                    >
+                      <span className="hidden-goal" ref={this.goalTwoHidden}>
+                        {goalTwo}
+                      </span>
+                      <Input
+                        startAdornment={
+                          <span
+                            className={!goalTwo && "goal-checkbox-dim"}
+                            onClick={e => {
+                              if (!goalTwo) {
+                                e.stopPropagation();
+                                return;
+                              }
+                              this.onUpdateField({
+                                goalTwoCompleted: !goalTwoCompleted
+                              });
+                            }}
+                          >
+                            <InputAdornment position="start">
+                              {goalTwoCompleted ? (
+                                <Icon>check_circle_outline</Icon>
+                              ) : (
+                                <Icon>radio_button_unchecked</Icon>
+                              )}
+                            </InputAdornment>
+                          </span>
+                        }
+                        disabled={(!goalTwo && !goalOne) || goalTwoCompleted}
+                        disableUnderline={true}
+                        value={goalTwo}
+                        placeholder="What are you striving for?"
+                        onChange={e =>
+                          this.setState({ goalTwo: e.target.value })
+                        }
+                        onKeyUp={() => this.setGoalWidth()}
+                        inputProps={{
+                          ref: this.goalTwoRef,
+                          className: goalTwoCompleted && "goal-completed",
+                          style: { width: goalWidth },
+                          onClick: () => this.handleInputClick(),
+                          onBlur: () => {
+                            this.setState({ goalTwoFixed: false });
+                            this.setGoalWidth(true);
+                            this.onUpdateField({ goalTwo });
+                          }
+                        }}
+                      />
                     </div>
                   </div>
                 </div>
