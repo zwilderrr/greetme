@@ -9,6 +9,8 @@ import BackgroundImage from "./BackgroundImage";
 
 import { fetchImage, sendDownloadRequest, getErrorImage } from "./API";
 
+const GOAL_TIMELINES = ["today", "this week", "this month"];
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -19,9 +21,10 @@ class App extends Component {
       showTime: true,
       showName: true,
       showStandardTime: true,
-      showGoals: true,
       showZoom: false,
       showNotes: false,
+      showGoals: true,
+      goalTimelineIndex: 0,
       imageQuery: "",
       savedBackground: false,
       backgroundImage: "",
@@ -204,6 +207,7 @@ class App extends Component {
       loadedImage,
       monospace
     } = this.state;
+    let { goalTimelineIndex } = this.state;
 
     // prevent a fetch on every render
     if (!savedBackground && shouldFetchImage) {
@@ -217,6 +221,7 @@ class App extends Component {
     }
 
     const backgroundLoading = imageLoading || !backgroundImage;
+    const goalTimeline = GOAL_TIMELINES[goalTimelineIndex];
 
     return (
       <div
@@ -367,7 +372,23 @@ class App extends Component {
               )}
               {showGoals && (
                 <div className="goals-container">
-                  <div className="goal-timeline-wrapper">
+                  <div className="goals-timeline-wrapper">
+                    <div
+                      className="goals-timeline"
+                      style={{ width: goalTimelineIndex < 1 ? "5vw" : "8vw" }}
+                      onClick={() => {
+                        let { goalTimelineIndex } = this.state;
+                        goalTimelineIndex =
+                          goalTimelineIndex == 2 ? 0 : (goalTimelineIndex += 1);
+                        this.onUpdateField({ goalTimelineIndex });
+                      }}
+                    >
+                      <Input
+                        disableUnderline={true}
+                        disabled={true}
+                        value={goalTimeline}
+                      />
+                    </div>
                     <div className="goals">
                       <div className="goal">
                         <div className="goal-one">goal one</div>

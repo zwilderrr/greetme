@@ -18,5 +18,5 @@
 - plus sign to add a goal
 - keeping the goals slightly off center until a max width is achieved
 - allowing the placeholder to overflow
-- placeholder over the text (or elipse the overflow)
-- recenter and fade in only on save
+- **placeholder over the text (or elipse the overflow)**
+- **recenter and fade in only on save**

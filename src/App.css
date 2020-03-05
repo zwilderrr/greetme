@@ -42,8 +42,14 @@
   animation: fade-in .3s ease-in-out;
 }
 
-.goals-container {
-  font-size: 1.5vw;
+.goals-container * {
+  font-size: 1.5vw !important;
+  color: white !important
+}
+
+.goals-timeline input {
+  text-align: right;
+  padding-right: 1vw;
 }
 
 .loading-screen-text {
@@ -147,7 +153,9 @@
   align-items: center;
 }
 
-.upper-left:hover, .upper-right:hover, .notes-font-icon {
+.upper-left:hover,
+.upper-right:hover,
+.notes-font-icon {
   cursor: default;
 }
 
@@ -201,6 +209,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -222,14 +231,17 @@
   0% {
     transform: scale(1);
   }
+
   90% {
     transform: scale(1.8);
     opacity: 1;
   }
+
   95% {
     opacity: 0.4;
     background-color: gray;
   }
+
   100% {
     transform: scale(1);
     opacity: 1;

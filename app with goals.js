@@ -422,11 +422,11 @@ class App extends Component {
                   <div
                     className="goal-timeline"
                     style={{ width: goalTimelineIndex < 1 ? "5vw" : "8vw" }}
-                    // onClick={() => {
-                    //   goalTimelineIndex =
-                    //     goalTimelineIndex == 2 ? 0 : (goalTimelineIndex += 1);
-                    //   this.onUpdateField({ goalTimelineIndex });
-                    // }}
+                    onClick={() => {
+                      goalTimelineIndex =
+                        goalTimelineIndex == 2 ? 0 : (goalTimelineIndex += 1);
+                      this.onUpdateField({ goalTimelineIndex });
+                    }}
                   >
                     <Input
                       disableUnderline={true}
