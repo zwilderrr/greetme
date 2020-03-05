@@ -148,7 +148,7 @@ class App extends Component {
   };
 
   handleDrawerOpen = () => {
-    // not ideal, but the onBlur event is not called when closing the screen,
+    // onBlur event is not called when closing the screen,
     // and for a lot of typing, setStorage limits will be exceeded
     this.onUpdateField({ showNotes: true });
     this.notesInterval = setInterval(() => {
@@ -279,7 +279,6 @@ class App extends Component {
               onChange={e => this.setState({ imageQuery: e.target.value })}
               onKeyUp={async e => {
                 e.key === "Enter" && this.getImage();
-                this.onUpdateField({ imageQuery });
               }}
               inputProps={{ maxLength: 30 }}
             />
@@ -340,7 +339,17 @@ class App extends Component {
                   }
                   classes={{ input: "name" }}
                   fullWidth={true}
-                  inputProps={{ maxLength: 30 }}
+                  inputProps={{
+                    maxLength: 30,
+                    onKeyUp: e => {
+                      if (e.key === "Enter") {
+                        e.target.blur();
+                        this.setState({ editing: false }, () =>
+                          this.onUpdateField({ name })
+                        );
+                      }
+                    }
+                  }}
                 />
               )}
             </div>

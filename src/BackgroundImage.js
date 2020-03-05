@@ -13,6 +13,7 @@ export default function BackgroundImage({
       <img
         src={backgroundImage}
         onLoad={() => setLoadingToFalse(backgroundImage)}
+        onError={() => setLoadingToFalse()}
         style={{ display: "none" }}
         alt="background"
       />
