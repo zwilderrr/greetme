@@ -420,7 +420,9 @@ class App extends Component {
                   onMouseLeave={this.handleGoalsLeave}
                 >
                   <div
-                    className="goal-timeline"
+                    className={`goal-timeline ${
+                      goalTimelineIndex < 1 ? "fade-in" : "fade-in-again"
+                    }`}
                     style={{ width: goalTimelineIndex < 1 ? "5vw" : "8vw" }}
                     onClick={() => {
                       goalTimelineIndex =

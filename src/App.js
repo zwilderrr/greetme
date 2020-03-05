@@ -203,6 +203,8 @@ class App extends Component {
       showZoom,
       showNotes,
       showGoals,
+      goalOne,
+      goalTwo,
       imageLoading,
       loadedImage,
       monospace
@@ -391,10 +393,32 @@ class App extends Component {
                     </div>
                     <div className="goals">
                       <div className="goal">
-                        <div className="goal-one">goal one</div>
+                        <div className="goal-one">
+                          <Input
+                            value={goalOne}
+                            placeholder="What are you striving for?"
+                            disableUnderline={true}
+                            inputProps={{
+                              onChange: e =>
+                                this.onUpdateField({ goalOne: e.target.value }),
+                              onKeyUp: e => e.key === "Enter" && e.target.blur()
+                            }}
+                          />
+                        </div>
                       </div>
                       <div className="goal">
-                        <div className="goal-two">goal two</div>
+                        <div className="goal-two">
+                          <Input
+                            value={goalTwo}
+                            placeholder="What are you striving for?"
+                            disableUnderline={true}
+                            inputProps={{
+                              onChange: e =>
+                                this.onUpdateField({ goalTwo: e.target.value }),
+                              onKeyUp: e => e.key === "Enter" && e.target.blur()
+                            }}
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>

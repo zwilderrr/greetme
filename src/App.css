@@ -52,6 +52,11 @@
   padding-right: 1vw;
 }
 
+.goals-timeline-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
 .loading-screen-text {
   text-align: center;
   position: relative;
