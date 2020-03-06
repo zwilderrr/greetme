@@ -42,6 +42,10 @@
   animation: fade-in .3s ease-in-out;
 }
 
+.goal {
+  text-align: left;
+}
+
 .goals-container * {
   font-size: 1.5vw !important;
   color: white !important
@@ -55,6 +59,11 @@
 .goals-timeline-wrapper {
   display: flex;
   justify-content: center;
+}
+
+.hidden-goal {
+  position: absolute;
+  visibility: hidden;
 }
 
 .loading-screen-text {

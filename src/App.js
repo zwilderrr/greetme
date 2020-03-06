@@ -28,13 +28,15 @@ class App extends Component {
       imageQuery: "",
       savedBackground: false,
       backgroundImage: "",
+      goalWidth: "18vw",
       imageLoading: true,
       monospace: false
     };
 
     this.clockInterval = undefined;
     this.notesInterval = undefined;
-    this.notesBodyRef = React.createRef();
+    this.hiddenGoalOneRef = React.createRef();
+    this.hiddenGoalTwoRef = React.createRef();
   }
 
   componentDidMount = async () => {
@@ -183,6 +185,15 @@ class App extends Component {
     }
   };
 
+  calculateGoalWidth = () => {
+    console.log(
+      this.hiddenGoalOneRef.current && this.hiddenGoalOneRef.current.offsetWidth
+    );
+    console.log(
+      this.hiddenGoalTwoRef.current && this.hiddenGoalTwoRef.current.offsetWidth
+    );
+  };
+
   render() {
     const {
       backgroundImage,
@@ -207,6 +218,7 @@ class App extends Component {
       goalTwo,
       goalOneCompleted,
       goalTwoCompleted,
+      goalWidth,
       imageLoading,
       loadedImage,
       monospace
@@ -422,11 +434,13 @@ class App extends Component {
                               style: {
                                 textDecoration:
                                   goalOneCompleted && "line-through",
-                                width: "18vw"
+                                width: goalWidth
                               },
                               onChange: e =>
                                 this.onUpdateField({ goalOne: e.target.value }),
-                              onKeyUp: e => e.key === "Enter" && e.target.blur()
+                              onKeyUp: e =>
+                                e.key === "Enter" && e.target.blur(),
+                              onBlur: () => this.calculateGoalWidth()
                             }}
                           />
                         </div>
@@ -461,14 +475,22 @@ class App extends Component {
                               style: {
                                 textDecoration:
                                   goalTwoCompleted && "line-through",
-                                width: "18vw"
+                                width: goalWidth
                               },
                               onChange: e =>
                                 this.onUpdateField({ goalTwo: e.target.value }),
-                              onKeyUp: e => e.key === "Enter" && e.target.blur()
+                              onKeyUp: e =>
+                                e.key === "Enter" && e.target.blur(),
+                              onBlur: () => this.calculateGoalWidth()
                             }}
                           />
                         </div>
+                      </div>
+                      <div ref={this.hiddenGoalOneRef} className="hidden-goa">
+                        {goalOne}
+                      </div>
+                      <div ref={this.hiddenGoalTwoRef} className="hidden-goa">
+                        {goalTwo}
                       </div>
                     </div>
                   </div>
