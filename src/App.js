@@ -457,6 +457,8 @@ class App extends Component {
                                 width:
                                   ((goalOne || goalTwo) && goalWidth) || "18vw"
                               },
+                              // need to set state instead of updating field so you can click in the field
+                              // without the text jumping to the end
                               onChange: e =>
                                 this.onUpdateField({ goalOne: e.target.value }),
                               onKeyUp: e =>
@@ -499,6 +501,8 @@ class App extends Component {
                                 width:
                                   ((goalOne || goalTwo) && goalWidth) || "18vw"
                               },
+                              // need to set state instead of updating field so you can click in the field
+                              // without the text jumping to the end
                               onChange: e =>
                                 this.onUpdateField({ goalTwo: e.target.value }),
                               onKeyUp: e =>

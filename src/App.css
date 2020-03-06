@@ -46,6 +46,10 @@
   text-align: left;
 }
 
+.goal input {
+  text-overflow: ellipsis;
+}
+
 .goals-container * {
   font-size: 1.5vw !important;
   color: white !important
