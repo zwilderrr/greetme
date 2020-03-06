@@ -28,7 +28,7 @@ class App extends Component {
       imageQuery: "",
       savedBackground: false,
       backgroundImage: "",
-      goalWidth: "18vw",
+      // goalWidth: "18vw",
       imageLoading: true,
       monospace: false
     };
@@ -451,7 +451,7 @@ class App extends Component {
                               style: {
                                 textDecoration:
                                   goalOneCompleted && "line-through",
-                                width: goalWidth
+                                width: goalWidth || "18vw"
                               },
                               onChange: e =>
                                 this.onUpdateField({ goalOne: e.target.value }),
@@ -494,7 +494,7 @@ class App extends Component {
                               style: {
                                 textDecoration:
                                   goalTwoCompleted && "line-through",
-                                width: goalWidth
+                                width: goalWidth || "18vw"
                               },
                               onChange: e =>
                                 this.onUpdateField({ goalTwo: e.target.value }),
