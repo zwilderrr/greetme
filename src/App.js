@@ -186,17 +186,17 @@ class App extends Component {
   };
 
   calculateGoalWidth = () => {
-    let hg1rWidth = 0;
-    let hg2rWidth = 0;
+    let hiddenGoalOneWidth = 0;
+    let hiddenGoalTwoWidth = 0;
 
     if (this.hiddenGoalOneRef.current) {
-      hg1rWidth = this.hiddenGoalOneRef.current.offsetWidth;
+      hiddenGoalOneWidth = this.hiddenGoalOneRef.current.offsetWidth;
     }
     if (this.hiddenGoalTwoRef.current) {
-      hg2rWidth = this.hiddenGoalTwoRef.current.offsetWidth;
+      hiddenGoalTwoWidth = this.hiddenGoalTwoRef.current.offsetWidth;
     }
 
-    let widestGoal = Math.max(hg1rWidth, hg2rWidth);
+    let widestGoal = Math.max(hiddenGoalOneWidth, hiddenGoalTwoWidth);
 
     // no goals
     if (widestGoal === 0) {
@@ -204,11 +204,14 @@ class App extends Component {
       return;
     }
 
-    if (widestGoal < 15) {
-      widestGoal = 30;
+    let widestGoalVW = Math.ceil((widestGoal / window.innerWidth) * 100);
+
+    // small goals
+    if (widestGoalVW < 3) {
+      widestGoalVW = 3;
     }
 
-    this.onUpdateField({ goalWidth: `${widestGoal + 5}px` });
+    this.onUpdateField({ goalWidth: `${widestGoalVW + 1}vw` });
   };
 
   render() {
@@ -486,8 +489,6 @@ class App extends Component {
                             value={goalTwo}
                             placeholder="What are you striving for?"
                             disableUnderline={true}
-                            // consider revisiting this logic bc it may not resize
-                            // when goalOne was deleted and then goalTwo was deleted
                             disabled={
                               (!goalOne && !goalTwo) || goalTwoCompleted
                             }
