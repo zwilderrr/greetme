@@ -417,7 +417,13 @@ class App extends Component {
                             value={goalOne}
                             placeholder="What are you striving for?"
                             disableUnderline={true}
+                            disabled={goalOneCompleted}
                             inputProps={{
+                              style: {
+                                textDecoration:
+                                  goalOneCompleted && "line-through",
+                                width: "18vw"
+                              },
                               onChange: e =>
                                 this.onUpdateField({ goalOne: e.target.value }),
                               onKeyUp: e => e.key === "Enter" && e.target.blur()
@@ -448,7 +454,15 @@ class App extends Component {
                             value={goalTwo}
                             placeholder="What are you striving for?"
                             disableUnderline={true}
+                            disabled={
+                              (!goalOne && !goalTwo) || goalTwoCompleted
+                            }
                             inputProps={{
+                              style: {
+                                textDecoration:
+                                  goalTwoCompleted && "line-through",
+                                width: "18vw"
+                              },
                               onChange: e =>
                                 this.onUpdateField({ goalTwo: e.target.value }),
                               onKeyUp: e => e.key === "Enter" && e.target.blur()
