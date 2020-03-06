@@ -192,6 +192,15 @@ class App extends Component {
     console.log(
       this.hiddenGoalTwoRef.current && this.hiddenGoalTwoRef.current.offsetWidth
     );
+    let hg1rWidth = 0;
+    let hg2rWidth = 0;
+
+    let widestGoal = Math.max(hg1rWidth, hg2rWidth);
+    if (widestGoal < 15) {
+      widestGoal = 15;
+    }
+
+    this.onUpdateField({ goalWidth: `${widestGoal}px` });
   };
 
   render() {
