@@ -420,15 +420,13 @@ class App extends Component {
                   onMouseLeave={this.handleGoalsLeave}
                 >
                   <div
-                    className={`goal-timeline ${
-                      goalTimelineIndex < 1 ? "fade-in" : "fade-in-again"
-                    }`}
+                    className="goal-timeline"
                     style={{ width: goalTimelineIndex < 1 ? "5vw" : "8vw" }}
-                    onClick={() => {
-                      goalTimelineIndex =
-                        goalTimelineIndex == 2 ? 0 : (goalTimelineIndex += 1);
-                      this.onUpdateField({ goalTimelineIndex });
-                    }}
+                    // onClick={() => {
+                    //   goalTimelineIndex =
+                    //     goalTimelineIndex == 2 ? 0 : (goalTimelineIndex += 1);
+                    //   this.onUpdateField({ goalTimelineIndex });
+                    // }}
                   >
                     <Input
                       disableUnderline={true}

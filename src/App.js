@@ -2,7 +2,7 @@
 
 import React, { Component } from "react";
 import * as moment from "moment";
-import { Input, Icon, Drawer } from "@material-ui/core";
+import { Input, Icon, Drawer, InputAdornment } from "@material-ui/core";
 import "./App.css";
 import { PinOutlined, PinFilled } from "./pinIcons";
 import BackgroundImage from "./BackgroundImage";
@@ -205,6 +205,8 @@ class App extends Component {
       showGoals,
       goalOne,
       goalTwo,
+      goalOneCompleted,
+      goalTwoCompleted,
       imageLoading,
       loadedImage,
       monospace
@@ -395,6 +397,23 @@ class App extends Component {
                       <div className="goal">
                         <div className="goal-one">
                           <Input
+                            startAdornment={
+                              <InputAdornment
+                                position="start"
+                                onClick={() => {
+                                  (goalOne || goalOneCompleted) &&
+                                    this.onUpdateField({
+                                      goalOneCompleted: !goalOneCompleted
+                                    });
+                                }}
+                              >
+                                {goalOneCompleted ? (
+                                  <Icon>check_circle_outline</Icon>
+                                ) : (
+                                  <Icon>radio_button_unchecked</Icon>
+                                )}
+                              </InputAdornment>
+                            }
                             value={goalOne}
                             placeholder="What are you striving for?"
                             disableUnderline={true}
@@ -409,6 +428,23 @@ class App extends Component {
                       <div className="goal">
                         <div className="goal-two">
                           <Input
+                            startAdornment={
+                              <InputAdornment
+                                position="start"
+                                onClick={() => {
+                                  (goalTwo || goalTwoCompleted) &&
+                                    this.onUpdateField({
+                                      goalTwoCompleted: !goalTwoCompleted
+                                    });
+                                }}
+                              >
+                                {goalTwoCompleted ? (
+                                  <Icon>check_circle_outline</Icon>
+                                ) : (
+                                  <Icon>radio_button_unchecked</Icon>
+                                )}
+                              </InputAdornment>
+                            }
                             value={goalTwo}
                             placeholder="What are you striving for?"
                             disableUnderline={true}
