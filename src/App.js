@@ -451,7 +451,8 @@ class App extends Component {
                               style: {
                                 textDecoration:
                                   goalOneCompleted && "line-through",
-                                width: goalWidth || "18vw"
+                                width:
+                                  ((goalOne || goalTwo) && goalWidth) || "18vw"
                               },
                               onChange: e =>
                                 this.onUpdateField({ goalOne: e.target.value }),
@@ -494,7 +495,8 @@ class App extends Component {
                               style: {
                                 textDecoration:
                                   goalTwoCompleted && "line-through",
-                                width: goalWidth || "18vw"
+                                width:
+                                  ((goalOne || goalTwo) && goalWidth) || "18vw"
                               },
                               onChange: e =>
                                 this.onUpdateField({ goalTwo: e.target.value }),
