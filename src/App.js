@@ -186,21 +186,29 @@ class App extends Component {
   };
 
   calculateGoalWidth = () => {
-    console.log(
-      this.hiddenGoalOneRef.current && this.hiddenGoalOneRef.current.offsetWidth
-    );
-    console.log(
-      this.hiddenGoalTwoRef.current && this.hiddenGoalTwoRef.current.offsetWidth
-    );
     let hg1rWidth = 0;
     let hg2rWidth = 0;
 
-    let widestGoal = Math.max(hg1rWidth, hg2rWidth);
-    if (widestGoal < 15) {
-      widestGoal = 15;
+    if (this.hiddenGoalOneRef.current) {
+      hg1rWidth = this.hiddenGoalOneRef.current.offsetWidth;
+    }
+    if (this.hiddenGoalTwoRef.current) {
+      hg2rWidth = this.hiddenGoalTwoRef.current.offsetWidth;
     }
 
-    this.onUpdateField({ goalWidth: `${widestGoal}px` });
+    let widestGoal = Math.max(hg1rWidth, hg2rWidth);
+
+    // no goals
+    if (widestGoal === 0) {
+      this.onUpdateField({ goalWidth: "18vw" });
+      return;
+    }
+
+    if (widestGoal < 15) {
+      widestGoal = 30;
+    }
+
+    this.onUpdateField({ goalWidth: `${widestGoal + 5}px` });
   };
 
   render() {
@@ -477,6 +485,8 @@ class App extends Component {
                             value={goalTwo}
                             placeholder="What are you striving for?"
                             disableUnderline={true}
+                            // consider revisiting this logic bc it may not resize
+                            // when goalOne was deleted and then goalTwo was deleted
                             disabled={
                               (!goalOne && !goalTwo) || goalTwoCompleted
                             }
@@ -495,12 +505,12 @@ class App extends Component {
                           />
                         </div>
                       </div>
-                      <div ref={this.hiddenGoalOneRef} className="hidden-goa">
+                      <span ref={this.hiddenGoalOneRef} className="hidden-goal">
                         {goalOne}
-                      </div>
-                      <div ref={this.hiddenGoalTwoRef} className="hidden-goa">
+                      </span>
+                      <span ref={this.hiddenGoalTwoRef} className="hidden-goal">
                         {goalTwo}
-                      </div>
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -550,7 +560,7 @@ class App extends Component {
                 className={`notes-font-icon settings-text ${monospace &&
                   "selected"}`}
               >
-                {"</>"}
+                {"</div>"}
               </div>
             </div>
             <textarea
