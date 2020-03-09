@@ -185,7 +185,7 @@ class App extends Component {
     }
   };
 
-  calculateGoalWidth = () => {
+  calculateGoalWidthAndSave = () => {
     const { goalOne, goalTwo } = this.state;
     let hiddenGoalOneWidth = 0;
     let hiddenGoalTwoWidth = 0;
@@ -208,8 +208,8 @@ class App extends Component {
     let widestGoalVW = Math.ceil((widestGoal / window.innerWidth) * 100);
 
     // small goals
-    if (widestGoalVW < 14) {
-      widestGoalVW = 14;
+    if (widestGoalVW < 13) {
+      widestGoalVW = 13;
     }
 
     widestGoalVW += 1;
@@ -465,7 +465,7 @@ class App extends Component {
                                 this.setState({ goalOne: e.target.value }),
                               onKeyUp: e =>
                                 e.key === "Enter" && e.target.blur(),
-                              onBlur: () => this.calculateGoalWidth()
+                              onBlur: () => this.calculateGoalWidthAndSave()
                             }}
                           />
                         </div>
@@ -506,7 +506,7 @@ class App extends Component {
                                 this.setState({ goalTwo: e.target.value }),
                               onKeyUp: e =>
                                 e.key === "Enter" && e.target.blur(),
-                              onBlur: () => this.calculateGoalWidth()
+                              onBlur: () => this.calculateGoalWidthAndSave()
                             }}
                           />
                         </div>
