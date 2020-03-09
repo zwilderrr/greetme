@@ -168,9 +168,9 @@ class App extends Component {
   };
 
   handleTextFieldSave = e => {
-    const { notes, imageQuery, name } = this.state;
+    const { notes, imageQuery, name, goalOne, goalTwo } = this.state;
     if (e.type === "mouseleave") {
-      this.onUpdateField({ notes, imageQuery, name });
+      this.onUpdateField({ notes, imageQuery, name, goalOne, goalTwo });
     }
 
     if (e.type === "keydown") {
@@ -180,12 +180,13 @@ class App extends Component {
         e.key === "Control" ||
         e.key === "Escape"
       ) {
-        this.onUpdateField({ notes, imageQuery, name });
+        this.onUpdateField({ notes, imageQuery, name, goalOne, goalTwo });
       }
     }
   };
 
   calculateGoalWidth = () => {
+    const { goalOne, goalTwo } = this.state;
     let hiddenGoalOneWidth = 0;
     let hiddenGoalTwoWidth = 0;
 
@@ -200,18 +201,20 @@ class App extends Component {
 
     // no goals
     if (widestGoal === 0) {
-      this.onUpdateField({ goalWidth: "18vw" });
+      this.onUpdateField({ goalOne, goalTwo, goalWidth: "18vw" });
       return;
     }
 
     let widestGoalVW = Math.ceil((widestGoal / window.innerWidth) * 100);
 
     // small goals
-    if (widestGoalVW < 3) {
-      widestGoalVW = 3;
+    if (widestGoalVW < 14) {
+      widestGoalVW = 14;
     }
 
-    this.onUpdateField({ goalWidth: `${widestGoalVW + 1}vw` });
+    widestGoalVW += 1;
+
+    this.onUpdateField({ goalOne, goalTwo, goalWidth: `${widestGoalVW}vw` });
   };
 
   render() {
@@ -454,13 +457,12 @@ class App extends Component {
                               style: {
                                 textDecoration:
                                   goalOneCompleted && "line-through",
-                                width:
-                                  ((goalOne || goalTwo) && goalWidth) || "18vw"
+                                width: goalWidth || "18vw"
                               },
                               // need to set state instead of updating field so you can click in the field
                               // without the text jumping to the end
                               onChange: e =>
-                                this.onUpdateField({ goalOne: e.target.value }),
+                                this.setState({ goalOne: e.target.value }),
                               onKeyUp: e =>
                                 e.key === "Enter" && e.target.blur(),
                               onBlur: () => this.calculateGoalWidth()
@@ -498,13 +500,10 @@ class App extends Component {
                               style: {
                                 textDecoration:
                                   goalTwoCompleted && "line-through",
-                                width:
-                                  ((goalOne || goalTwo) && goalWidth) || "18vw"
+                                width: goalWidth || "18vw"
                               },
-                              // need to set state instead of updating field so you can click in the field
-                              // without the text jumping to the end
                               onChange: e =>
-                                this.onUpdateField({ goalTwo: e.target.value }),
+                                this.setState({ goalTwo: e.target.value }),
                               onKeyUp: e =>
                                 e.key === "Enter" && e.target.blur(),
                               onBlur: () => this.calculateGoalWidth()
