@@ -434,6 +434,7 @@ class App extends Component {
                           <Input
                             startAdornment={
                               <InputAdornment
+                                className="checkbox"
                                 position="start"
                                 onClick={() => {
                                   (goalOne || goalOneCompleted) &&
@@ -459,8 +460,6 @@ class App extends Component {
                                   goalOneCompleted && "line-through",
                                 width: goalWidth || "18vw"
                               },
-                              // need to set state instead of updating field so you can click in the field
-                              // without the text jumping to the end
                               onChange: e =>
                                 this.setState({ goalOne: e.target.value }),
                               onKeyUp: e =>
@@ -475,6 +474,7 @@ class App extends Component {
                           <Input
                             startAdornment={
                               <InputAdornment
+                                className="checkbox"
                                 position="start"
                                 onClick={() => {
                                   (goalTwo || goalTwoCompleted) &&

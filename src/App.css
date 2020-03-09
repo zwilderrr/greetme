@@ -46,6 +46,10 @@
   text-align: left;
 }
 
+.checkbox span {
+  cursor: default;
+}
+
 .goal input {
   text-overflow: ellipsis;
 }
