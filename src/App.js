@@ -567,7 +567,7 @@ class App extends Component {
                 className={`notes-font-icon settings-text ${monospace &&
                   "selected"}`}
               >
-                {"</div>"}
+                {"</>"}
               </div>
             </div>
             <textarea
