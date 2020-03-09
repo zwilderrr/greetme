@@ -16,7 +16,7 @@ class App extends Component {
     super(props);
     this.state = {
       name: "",
-      editing: false,
+      editingName: false,
       time: moment().format("h:mma"),
       showTime: true,
       showName: true,
@@ -124,8 +124,8 @@ class App extends Component {
   };
 
   formatName = () => {
-    const { name, editing } = this.state;
-    if (editing) {
+    const { name, editingName } = this.state;
+    if (editingName) {
       return name;
     }
     if (!name) {
@@ -232,6 +232,7 @@ class App extends Component {
       shouldFetchImage,
       savedBackground,
       showName,
+      editingName,
       showTime,
       showStandardTime,
       showZoom,
@@ -383,14 +384,14 @@ class App extends Component {
               )}
               {showName && (
                 <Input
-                  className="name fade-in"
+                  className={`name ${!editingName && "fade-in"}`}
                   value={this.formatName()}
                   placeholder="What's your name?"
                   onChange={e => this.setState({ name: e.target.value })}
                   disableUnderline={true}
-                  onClick={() => this.setState({ editing: true })}
+                  onClick={() => this.setState({ editingName: true })}
                   onBlur={() =>
-                    this.setState({ editing: false }, () =>
+                    this.setState({ editingName: false }, () =>
                       this.onUpdateField({ name })
                     )
                   }
@@ -401,7 +402,7 @@ class App extends Component {
                     onKeyUp: e => {
                       if (e.key === "Enter") {
                         e.target.blur();
-                        this.setState({ editing: false }, () =>
+                        this.setState({ editingName: false }, () =>
                           this.onUpdateField({ name })
                         );
                       }
