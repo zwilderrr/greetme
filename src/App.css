@@ -46,7 +46,12 @@
   text-align: left;
 }
 
-.checkbox span {
+.goal-checkbox-dim {
+  color: ghostwhite;
+  opacity: .5;
+}
+
+.goal-checkbox span {
   cursor: default;
 }
 
@@ -67,6 +72,10 @@
 .goals-timeline-wrapper {
   display: flex;
   justify-content: center;
+}
+
+.goal-two {
+  visibility: hidden;
 }
 
 .hidden-goal {
