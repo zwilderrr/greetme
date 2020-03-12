@@ -431,7 +431,7 @@ class App extends Component {
               )}
               {showGoals && (
                 <div
-                  className="goals-container"
+                  className="goals-container fade-in"
                   onMouseEnter={() =>
                     this.setState({
                       hoveringGoals: true,
@@ -537,7 +537,7 @@ class App extends Component {
                               </InputAdornment>
                             }
                             value={goalTwo}
-                            placeholder="What are you striving for?"
+                            placeholder="Going for two?"
                             disableUnderline={true}
                             disabled={
                               (!goalOne && !goalTwo) || goalTwoCompleted

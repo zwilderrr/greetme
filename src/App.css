@@ -20,7 +20,7 @@
 .content-wrapper-with-goals {
   left: 50%;
   position: absolute;
-  top: 35vh;
+  top: 38vh;
 }
 
 .content {
@@ -57,6 +57,11 @@
 
 .goal input {
   text-overflow: ellipsis;
+}
+
+.goals-container {
+  position: relative;
+  bottom: 1.5vw;
 }
 
 .goals-container * {
