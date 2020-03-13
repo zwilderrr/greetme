@@ -20,7 +20,7 @@
 .content-wrapper-with-goals {
   left: 50%;
   position: absolute;
-  top: 45vh;
+  top: 46vh;
 }
 
 .content {
@@ -39,7 +39,7 @@
 }
 
 .fade-in-again {
-  animation: fade-in .3s ease-in-out;
+  animation: fade-in 1s ease-in-out;
 }
 
 .goal {
@@ -67,6 +67,11 @@
 .goals-container * {
   font-size: 1.5vw !important;
   color: white !important
+}
+
+.goals-timeline {
+  position: relative;
+  bottom: 1px;
 }
 
 .goals-timeline input {
@@ -230,7 +235,7 @@
 
 .time-hide {
   visibility: hidden;
-  height: 12vw;
+  height: 15vw;
 }
 
 .rotate {

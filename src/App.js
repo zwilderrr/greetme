@@ -282,6 +282,8 @@ class App extends Component {
     const goalTwoVisible =
       showGoals && (goalTwo || hoveringGoals || showGoalTwo);
 
+    const goalInputWidth = !goalOne && !goalTwo ? "18vw" : goalWidth;
+
     return (
       <div
         onKeyDown={this.handleTextFieldSave}
@@ -500,7 +502,7 @@ class App extends Component {
                               style: {
                                 textDecoration:
                                   goalOneCompleted && "line-through",
-                                width: goalWidth || "18vw"
+                                width: goalInputWidth
                               },
                               onChange: e =>
                                 this.setState({ goalOne: e.target.value }),
@@ -547,7 +549,7 @@ class App extends Component {
                               style: {
                                 textDecoration:
                                   goalTwoCompleted && "line-through",
-                                width: goalWidth || "18vw"
+                                width: goalInputWidth
                               },
                               onChange: e =>
                                 this.setState({ goalTwo: e.target.value }),
