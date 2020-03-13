@@ -24,11 +24,11 @@ class App extends Component {
       showZoom: false,
       showNotes: false,
       showGoals: true,
+      hoveringGoals: false,
       goalTimelineIndex: 0,
       imageQuery: "",
       savedBackground: false,
       backgroundImage: "",
-      // goalWidth: "18vw",
       imageLoading: true,
       monospace: false
     };
@@ -201,7 +201,14 @@ class App extends Component {
 
     // no goals
     if (widestGoal === 0) {
-      this.onUpdateField({ goalOne, goalTwo, goalWidth: "18vw" });
+      this.onUpdateField({
+        goalOne,
+        goalTwo,
+        goalWidth: "18vw"
+      });
+      this.setState({
+        showGoalTwo: false
+      });
       return;
     }
 
@@ -214,7 +221,15 @@ class App extends Component {
 
     widestGoalVW += 1;
 
-    this.onUpdateField({ goalOne, goalTwo, goalWidth: `${widestGoalVW}vw` });
+    this.onUpdateField({
+      goalOne,
+      goalTwo,
+      goalWidth: `${widestGoalVW}vw`
+    });
+
+    this.setState({
+      showGoalTwo: false
+    });
   };
 
   render() {
@@ -238,6 +253,8 @@ class App extends Component {
       showZoom,
       showNotes,
       showGoals,
+      hoveringGoals,
+      showGoalTwo,
       goalOne,
       goalTwo,
       goalOneCompleted,
@@ -262,6 +279,10 @@ class App extends Component {
 
     const backgroundLoading = imageLoading || !backgroundImage;
     const goalTimeline = GOAL_TIMELINES[goalTimelineIndex];
+    const goalTwoVisible =
+      showGoals && (goalTwo || hoveringGoals || showGoalTwo);
+
+    const goalInputWidth = !goalOne && !goalTwo ? "18vw" : goalWidth;
 
     return (
       <div
@@ -411,7 +432,26 @@ class App extends Component {
                 />
               )}
               {showGoals && (
-                <div className="goals-container">
+                <div
+                  className="goals-container fade-in"
+                  onMouseEnter={() =>
+                    this.setState({
+                      hoveringGoals: true,
+                      showGoalTwo: true
+                    })
+                  }
+                  onMouseLeave={() => {
+                    // if goal one or two is focused, show goalTwo
+                    const eitherGoalFocused = [
+                      "goal-one-input",
+                      "goal-two-input"
+                    ].includes(document.activeElement.id);
+                    this.setState({
+                      showGoalTwo: eitherGoalFocused,
+                      hoveringGoals: false
+                    });
+                  }}
+                >
                   <div className="goals-timeline-wrapper">
                     <div
                       className="goals-timeline"
@@ -433,9 +473,11 @@ class App extends Component {
                       <div className="goal">
                         <div className="goal-one">
                           <Input
+                            key="goal-one"
                             startAdornment={
                               <InputAdornment
-                                className="checkbox"
+                                className={`goal-checkbox ${!goalOne &&
+                                  "goal-checkbox-dim"}`}
                                 position="start"
                                 onClick={() => {
                                   (goalOne || goalOneCompleted) &&
@@ -456,10 +498,11 @@ class App extends Component {
                             disableUnderline={true}
                             disabled={goalOneCompleted}
                             inputProps={{
+                              id: "goal-one-input",
                               style: {
                                 textDecoration:
                                   goalOneCompleted && "line-through",
-                                width: goalWidth || "18vw"
+                                width: goalInputWidth
                               },
                               onChange: e =>
                                 this.setState({ goalOne: e.target.value }),
@@ -471,11 +514,15 @@ class App extends Component {
                         </div>
                       </div>
                       <div className="goal">
-                        <div className="goal-two">
+                        <div
+                          className={`goal-two ${goalTwoVisible && "fade-in"}`}
+                          style={{ visibility: goalTwoVisible && "visible" }}
+                        >
                           <Input
                             startAdornment={
                               <InputAdornment
-                                className="checkbox"
+                                className={`goal-checkbox ${!goalTwo &&
+                                  "goal-checkbox-dim"}`}
                                 position="start"
                                 onClick={() => {
                                   (goalTwo || goalTwoCompleted) &&
@@ -492,16 +539,17 @@ class App extends Component {
                               </InputAdornment>
                             }
                             value={goalTwo}
-                            placeholder="What are you striving for?"
+                            placeholder="Going for two?"
                             disableUnderline={true}
                             disabled={
                               (!goalOne && !goalTwo) || goalTwoCompleted
                             }
                             inputProps={{
+                              id: "goal-two-input",
                               style: {
                                 textDecoration:
                                   goalTwoCompleted && "line-through",
-                                width: goalWidth || "18vw"
+                                width: goalInputWidth
                               },
                               onChange: e =>
                                 this.setState({ goalTwo: e.target.value }),
@@ -512,6 +560,7 @@ class App extends Component {
                           />
                         </div>
                       </div>
+
                       <span ref={this.hiddenGoalOneRef} className="hidden-goal">
                         {goalOne}
                       </span>
@@ -567,7 +616,7 @@ class App extends Component {
                 className={`notes-font-icon settings-text ${monospace &&
                   "selected"}`}
               >
-                {"</div>"}
+                {"</>"}
               </div>
             </div>
             <textarea

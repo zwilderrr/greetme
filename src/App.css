@@ -20,7 +20,7 @@
 .content-wrapper-with-goals {
   left: 50%;
   position: absolute;
-  top: 35vh;
+  top: 46vh;
 }
 
 .content {
@@ -39,14 +39,19 @@
 }
 
 .fade-in-again {
-  animation: fade-in .3s ease-in-out;
+  animation: fade-in 1s ease-in-out;
 }
 
 .goal {
   text-align: left;
 }
 
-.checkbox span {
+.goal-checkbox-dim {
+  color: ghostwhite;
+  opacity: .5;
+}
+
+.goal-checkbox span {
   cursor: default;
 }
 
@@ -54,9 +59,19 @@
   text-overflow: ellipsis;
 }
 
+.goals-container {
+  position: relative;
+  bottom: 1.5vw;
+}
+
 .goals-container * {
   font-size: 1.5vw !important;
   color: white !important
+}
+
+.goals-timeline {
+  position: relative;
+  bottom: 1px;
 }
 
 .goals-timeline input {
@@ -67,6 +82,10 @@
 .goals-timeline-wrapper {
   display: flex;
   justify-content: center;
+}
+
+.goal-two {
+  visibility: hidden;
 }
 
 .hidden-goal {
@@ -216,7 +235,7 @@
 
 .time-hide {
   visibility: hidden;
-  height: 12vw;
+  height: 15vw;
 }
 
 .rotate {
