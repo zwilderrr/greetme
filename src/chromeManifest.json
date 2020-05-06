@@ -3,7 +3,7 @@
   "name": "Greetme - gorgeous Unsplash photos, tasks",
   "short_name": "Greetme",
   "description": "Stunning Unsplash photos, your chosen category, each and every tab.",
-  "version": "0.0.5",
+  "version": "0.0.10",
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
