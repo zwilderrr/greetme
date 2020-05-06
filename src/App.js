@@ -30,7 +30,7 @@ class App extends Component {
       savedBackground: false,
       backgroundImage: "",
       imageLoading: true,
-      monospace: false
+      monospace: false,
     };
 
     this.clockInterval = undefined;
@@ -83,7 +83,7 @@ class App extends Component {
     this.clockInterval = setInterval(() => {
       const timeFormat = this.state.showStandardTime ? "h:mma" : "HH:mm";
       this.setState({
-        time: moment().format(timeFormat)
+        time: moment().format(timeFormat),
       });
     }, 1000);
   };
@@ -204,10 +204,10 @@ class App extends Component {
       this.onUpdateField({
         goalOne,
         goalTwo,
-        goalWidth: "18vw"
+        goalWidth: "18vw",
       });
       this.setState({
-        showGoalTwo: false
+        showGoalTwo: false,
       });
       return;
     }
@@ -224,11 +224,11 @@ class App extends Component {
     this.onUpdateField({
       goalOne,
       goalTwo,
-      goalWidth: `${widestGoalVW}vw`
+      goalWidth: `${widestGoalVW}vw`,
     });
 
     this.setState({
-      showGoalTwo: false
+      showGoalTwo: false,
     });
   };
 
@@ -262,7 +262,7 @@ class App extends Component {
       goalWidth,
       imageLoading,
       loadedImage,
-      monospace
+      monospace,
     } = this.state;
     let { goalTimelineIndex } = this.state;
 
@@ -305,7 +305,7 @@ class App extends Component {
                 className="settings-toggle pin-icon"
                 onClick={() =>
                   this.onUpdateField({
-                    savedBackground: false
+                    savedBackground: false,
                   })
                 }
                 viewBox="0 0 24 24"
@@ -321,7 +321,7 @@ class App extends Component {
                     profileLink,
                     photographer,
                     photoLocation,
-                    downloadLocation
+                    downloadLocation,
                   })
                 }
               />
@@ -353,23 +353,25 @@ class App extends Component {
           </div>
           <div className="upper-right">
             <div
-              className={`settings-toggle settings-text ${showName &&
-                "selected"}`}
+              className={`settings-toggle settings-text ${
+                showName && "selected"
+              }`}
               onClick={() => this.onUpdateField({ showName: !showName })}
             >
               name
             </div>
             <div
-              className={`settings-toggle settings-text ${showTime &&
-                "selected"}`}
+              className={`settings-toggle settings-text ${
+                showTime && "selected"
+              }`}
               onClick={() => this.onUpdateField({ showTime: !showTime })}
             >
               clock
             </div>
             <div
-              className={`settings-toggle settings-text ${showStandardTime &&
-                showTime &&
-                "selected"}`}
+              className={`settings-toggle settings-text ${
+                showStandardTime && showTime && "selected"
+              }`}
               onClick={() =>
                 showTime &&
                 this.onUpdateField({ showStandardTime: !showStandardTime })
@@ -378,15 +380,17 @@ class App extends Component {
               12hr
             </div>
             <div
-              className={`settings-toggle settings-text ${showGoals &&
-                "selected"}`}
+              className={`settings-toggle settings-text ${
+                showGoals && "selected"
+              }`}
               onClick={() => this.onUpdateField({ showGoals: !showGoals })}
             >
               goals
             </div>
             <div
-              className={`settings-toggle settings-text ${showZoom &&
-                "selected"}`}
+              className={`settings-toggle settings-text ${
+                showZoom && "selected"
+              }`}
               onClick={() => this.onUpdateField({ showZoom: !showZoom })}
             >
               fly
@@ -419,6 +423,7 @@ class App extends Component {
                   classes={{ input: "name" }}
                   fullWidth={true}
                   inputProps={{
+                    autoComplete: false,
                     maxLength: 30,
                     onKeyUp: e => {
                       if (e.key === "Enter") {
@@ -427,7 +432,7 @@ class App extends Component {
                           this.onUpdateField({ name })
                         );
                       }
-                    }
+                    },
                   }}
                 />
               )}
@@ -437,18 +442,18 @@ class App extends Component {
                   onMouseEnter={() =>
                     this.setState({
                       hoveringGoals: true,
-                      showGoalTwo: true
+                      showGoalTwo: true,
                     })
                   }
                   onMouseLeave={() => {
                     // if goal one or two is focused, show goalTwo
                     const eitherGoalFocused = [
                       "goal-one-input",
-                      "goal-two-input"
+                      "goal-two-input",
                     ].includes(document.activeElement.id);
                     this.setState({
                       showGoalTwo: eitherGoalFocused,
-                      hoveringGoals: false
+                      hoveringGoals: false,
                     });
                   }}
                 >
@@ -476,13 +481,14 @@ class App extends Component {
                             key="goal-one"
                             startAdornment={
                               <InputAdornment
-                                className={`goal-checkbox ${!goalOne &&
-                                  "goal-checkbox-dim"}`}
+                                className={`goal-checkbox ${
+                                  !goalOne && "goal-checkbox-dim"
+                                }`}
                                 position="start"
                                 onClick={() => {
                                   (goalOne || goalOneCompleted) &&
                                     this.onUpdateField({
-                                      goalOneCompleted: !goalOneCompleted
+                                      goalOneCompleted: !goalOneCompleted,
                                     });
                                 }}
                               >
@@ -499,16 +505,17 @@ class App extends Component {
                             disabled={goalOneCompleted}
                             inputProps={{
                               id: "goal-one-input",
+                              autoComplete: false,
                               style: {
                                 textDecoration:
                                   goalOneCompleted && "line-through",
-                                width: goalInputWidth
+                                width: goalInputWidth,
                               },
                               onChange: e =>
                                 this.setState({ goalOne: e.target.value }),
                               onKeyUp: e =>
                                 e.key === "Enter" && e.target.blur(),
-                              onBlur: () => this.calculateGoalWidthAndSave()
+                              onBlur: () => this.calculateGoalWidthAndSave(),
                             }}
                           />
                         </div>
@@ -521,13 +528,14 @@ class App extends Component {
                           <Input
                             startAdornment={
                               <InputAdornment
-                                className={`goal-checkbox ${!goalTwo &&
-                                  "goal-checkbox-dim"}`}
+                                className={`goal-checkbox ${
+                                  !goalTwo && "goal-checkbox-dim"
+                                }`}
                                 position="start"
                                 onClick={() => {
                                   (goalTwo || goalTwoCompleted) &&
                                     this.onUpdateField({
-                                      goalTwoCompleted: !goalTwoCompleted
+                                      goalTwoCompleted: !goalTwoCompleted,
                                     });
                                 }}
                               >
@@ -546,16 +554,17 @@ class App extends Component {
                             }
                             inputProps={{
                               id: "goal-two-input",
+                              autoComplete: false,
                               style: {
                                 textDecoration:
                                   goalTwoCompleted && "line-through",
-                                width: goalInputWidth
+                                width: goalInputWidth,
                               },
                               onChange: e =>
                                 this.setState({ goalTwo: e.target.value }),
                               onKeyUp: e =>
                                 e.key === "Enter" && e.target.blur(),
-                              onBlur: () => this.calculateGoalWidthAndSave()
+                              onBlur: () => this.calculateGoalWidthAndSave(),
                             }}
                           />
                         </div>
@@ -613,8 +622,9 @@ class App extends Component {
               <div className="notes-title">notes</div>
               <div
                 onClick={() => this.onUpdateField({ monospace: !monospace })}
-                className={`notes-font-icon settings-text ${monospace &&
-                  "selected"}`}
+                className={`notes-font-icon settings-text ${
+                  monospace && "selected"
+                }`}
               >
                 {"</>"}
               </div>
