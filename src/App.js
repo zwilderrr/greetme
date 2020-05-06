@@ -336,7 +336,7 @@ class App extends Component {
             </Icon>
             <Input
               disabled={savedBackground}
-              autoComplete={false}
+              autoComplete="off"
               disableUnderline={true}
               value={imageQuery}
               style={{ color: savedBackground ? "lightgray" : "white" }}
@@ -412,6 +412,7 @@ class App extends Component {
                   className={`name ${!editingName && "fade-in"}`}
                   value={this.formatName()}
                   placeholder="What's your name?"
+                  autoComplete="off"
                   onChange={e => this.setState({ name: e.target.value })}
                   disableUnderline={true}
                   onClick={() => this.setState({ editingName: true })}
@@ -423,7 +424,6 @@ class App extends Component {
                   classes={{ input: "name" }}
                   fullWidth={true}
                   inputProps={{
-                    autoComplete: false,
                     maxLength: 30,
                     onKeyUp: e => {
                       if (e.key === "Enter") {
@@ -501,11 +501,11 @@ class App extends Component {
                             }
                             value={goalOne}
                             placeholder="What are you striving for?"
+                            autoComplete="off"
                             disableUnderline={true}
                             disabled={goalOneCompleted}
                             inputProps={{
                               id: "goal-one-input",
-                              autoComplete: false,
                               style: {
                                 textDecoration:
                                   goalOneCompleted && "line-through",
@@ -548,13 +548,13 @@ class App extends Component {
                             }
                             value={goalTwo}
                             placeholder="Going for two?"
+                            autoComplete="off"
                             disableUnderline={true}
                             disabled={
                               (!goalOne && !goalTwo) || goalTwoCompleted
                             }
                             inputProps={{
                               id: "goal-two-input",
-                              autoComplete: false,
                               style: {
                                 textDecoration:
                                   goalTwoCompleted && "line-through",
