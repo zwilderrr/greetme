@@ -44,7 +44,8 @@ class App extends Component {
       const nextState = { shouldFetchImage: true };
       Object.keys(res).forEach(k => (nextState[k] = res[k]));
 
-      // avoid a new background fetch when a person unselects a starred image
+      // avoid a new background fetch when a person unselects a
+      // starred image
       if (nextState.savedBackground) {
         nextState.shouldFetchImage = false;
       } else {
@@ -95,7 +96,8 @@ class App extends Component {
   onUpdateField = async update => {
     if (Object.keys(update)[0] === "savedBackground") {
       if (update.savedBackground) {
-        // unsplash requires a call to update the image's download count when a download type action is called
+        // unsplash requires a call to update the image's
+        // download count when a download type action is called
         this.triggerDownload();
       }
     }
@@ -131,6 +133,7 @@ class App extends Component {
     if (!name) {
       return "";
     }
+
     return this.getGreeting() + name;
   };
 
@@ -154,8 +157,8 @@ class App extends Component {
   };
 
   handleDrawerOpen = () => {
-    // onBlur event is not called when closing the screen,
-    // and for a lot of typing, setStorage limits will be exceeded
+    // onBlur event is not called when closing the screen, and
+    // for a lot of typing, setStorage limits will be exceeded
     this.onUpdateField({ showNotes: true });
     this.notesInterval = setInterval(() => {
       this.onUpdateField({ notes: this.state.notes });
@@ -219,7 +222,7 @@ class App extends Component {
       widestGoalVW = 13;
     }
 
-    widestGoalVW += 1;
+    widestGoalVW += 2;
 
     this.onUpdateField({
       goalOne,
@@ -341,9 +344,10 @@ class App extends Component {
               value={imageQuery}
               style={{ color: savedBackground ? "lightgray" : "white" }}
               placeholder="search for..."
-              /** shouldn't be updating state directly, but letting the
-                storageListener do it results in the curser jumpting to the end of
-                the text input regardless of where the user clicked */
+              /** shouldn't be updating state directly, but
+                letting the storageListener do it results in the
+                curser jumpting to the end of the text input
+                regardless of where the user clicked */
               onChange={e => this.setState({ imageQuery: e.target.value })}
               onKeyUp={async e => {
                 e.key === "Enter" && this.getImage();
@@ -446,7 +450,8 @@ class App extends Component {
                     })
                   }
                   onMouseLeave={() => {
-                    // if goal one or two is focused, show goalTwo
+                    // if goal one or two is focused, show
+                    // goalTwo
                     const eitherGoalFocused = [
                       "goal-one-input",
                       "goal-two-input",
