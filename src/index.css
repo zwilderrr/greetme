@@ -1,6 +1,13 @@
 body {
-  font-family: 'Hind Madurai', sans-serif !important;
+  font-family: "Hind Madurai", sans-serif !important;
   margin: 0;
   overflow: hidden;
   background: gainsboro;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
 }
