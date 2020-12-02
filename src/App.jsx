@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Background from "./components/Background";
-import Content from "./components/Content";
-import Notes from "./components/Notes";
+import Main from "./components/Main";
 import "./App.css";
 
 export default function App() {
   return (
     <>
       <Background />
-      <Content />
-      <Notes />
+      <Main />
     </>
   );
 }

@@ -20,16 +20,17 @@ export default function Main() {
       const storage = await getChromeStorage();
       const nextState = {};
       for (let key of Object.values(CHROME_KEYS)) {
-        nextState[makeShowKey(key)] = storage[key][makeShowKey(key)];
+        const showKey = makeShowKey(key);
+        nextState[showKey] = storage[key][showKey];
       }
       setShowState(nextState);
     }
     getElementsToDisplay();
   }, []);
 
-  function toggleHide(key, show) {
+  async function toggleHide(key, show) {
     const showKey = makeShowKey(key);
-    setChromeStorage(key, { [showKey]: show });
+    await setChromeStorage(key, { [showKey]: show });
     setShowState(s => {
       return { ...s, [showKey]: show };
     });

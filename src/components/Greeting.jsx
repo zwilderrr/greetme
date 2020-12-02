@@ -1,21 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { CHROME_KEYS } from "../constants";
-import { getChromeStorage, setChromeStorage } from "../api/chrome-api";
+import { CHROME_KEYS, NESTED_KEY_NAME } from "../constants";
+import { setChromeStorage } from "../api/chrome-api";
+import { useGetChromeStorage } from "../hooks";
 import "./Greeting.css";
 
 export default function Greeting(props) {
-  const [name, setName] = useState("");
+  const [name, setName] = useGetChromeStorage(
+    CHROME_KEYS.GREETING,
+    NESTED_KEY_NAME
+  );
   const [editing, setEditing] = useState(false);
 
-  useEffect(() => {
-    async function getName() {
-      const { name } = await getChromeStorage(CHROME_KEYS.GREETING);
-      name && setName(name);
-    }
-    getName();
-  }, []);
-
-  function handleFormSubmit(e) {
+  async function handleFormSubmit(e) {
     document.activeElement.blur();
     e.preventDefault();
     setEditing(false);
@@ -39,6 +35,7 @@ export default function Greeting(props) {
     if (!name) return "";
     return getGreeting() + name;
   }
+  console.log(name);
 
   return (
     <form
@@ -49,7 +46,10 @@ export default function Greeting(props) {
     >
       <input
         className="name"
-        onChange={e => setName(e.target.value)}
+        onChange={e => {
+          console.log(e.target.value);
+          setName(e.target.value);
+        }}
         value={formatName()}
         placeholder="What's your name?"
       />
