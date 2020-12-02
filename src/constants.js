@@ -9,12 +9,6 @@ export const CHROME_KEYS = {
   GREETING: "greeting",
 };
 
-export const hideableElements = [
-  CHROME_KEYS.TIME,
-  CHROME_KEYS.GREETING,
-  CHROME_KEYS.TASKS,
-];
-
 export const DEFAULT_STATE = {
   [CHROME_KEYS.BACKGROUND]: getErrorImage(),
   [CHROME_KEYS.ZOOM]: { showZoom: false },
