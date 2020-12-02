@@ -1,4 +1,5 @@
 /*global chrome*/
+import { DEFAULT_STATE } from "../constants";
 
 export function logStorage(...args) {
   chrome.storage.sync.get(null, res =>
@@ -6,18 +7,34 @@ export function logStorage(...args) {
   );
 }
 
-export function getChromeState(key) {
+export function getChromeStorage(key) {
   return new Promise((resolve, reject) => {
     chrome.storage.sync.get(key, res => {
-      // return either the obj the key points to, or an empty object
-      const obj = res[key] || {};
-      resolve(obj);
+      res = !key || Array.isArray(key) ? res : res[key];
+      resolve(res);
     });
   });
 }
 
-export async function setChromeState(key, update) {
-  const current = await getChromeState(key);
+export async function setChromeStorage(key, update) {
+  const current = await getChromeStorage(key);
   const next = { ...current, ...update };
-  chrome.storage.sync.set({ [key]: { ...next } }, logStorage);
+  return new Promise((resolve, reject) => {
+    chrome.storage.sync.set({ [key]: { ...next } }, () => {
+      logStorage();
+      resolve();
+    });
+  });
+}
+
+export async function initializeChromeStorage() {
+  const storage = await getChromeStorage();
+  if (Object.keys(storage).length === 0) {
+    return new Promise((resolve, reject) => {
+      chrome.storage.sync.set(DEFAULT_STATE, () => {
+        console.log("storage initialized from default state");
+        resolve();
+      });
+    });
+  }
 }

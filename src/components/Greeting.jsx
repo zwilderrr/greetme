@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { CHROME_KEYS } from "../chrome-keys";
-import { getChromeState, setChromeState } from "../api/chrome-api";
+import { CHROME_KEYS } from "../constants";
+import { getChromeStorage, setChromeStorage } from "../api/chrome-api";
 import "./Greeting.css";
 
-export default function Greeting() {
+export default function Greeting(props) {
   const [name, setName] = useState("");
   const [editing, setEditing] = useState(false);
 
   useEffect(() => {
     async function getName() {
-      const { name } = await getChromeState(CHROME_KEYS.GREETING);
+      const { name } = await getChromeStorage(CHROME_KEYS.GREETING);
       name && setName(name);
     }
     getName();
@@ -19,12 +19,12 @@ export default function Greeting() {
     document.activeElement.blur();
     e.preventDefault();
     setEditing(false);
-    setChromeState(CHROME_KEYS.GREETING, { name });
+    setChromeStorage(CHROME_KEYS.GREETING, { name });
   }
 
   function getGreeting() {
     const currentHour = new Date().getHours();
-    if (currentHour < 12) {
+    if (currentHour > 4 && currentHour < 12) {
       return "Good morning, ";
     } else if (currentHour < 17) {
       return "Good afternoon, ";

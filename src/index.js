@@ -2,9 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
+import { initializeChromeStorage } from "./api/chrome-api";
 
 import * as serviceWorker from "./serviceWorker";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+async function renderApp() {
+  await initializeChromeStorage();
+  ReactDOM.render(<App />, document.getElementById("root"));
+  serviceWorker.unregister();
+}
 
-serviceWorker.unregister();
+renderApp();
