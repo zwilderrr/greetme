@@ -1,0 +1,8 @@
+.separator {
+  color: inherit;
+  transition: 0.2s;
+}
+
+.hide {
+  color: transparent;
+}
