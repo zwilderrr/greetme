@@ -28,17 +28,18 @@ export default function Time() {
 
   function getAndSetTime() {
     const date = new Date();
+    let minutes = date.getMinutes().toString().padStart(2, 0);
     let hours = date.getHours();
-    let minutes = date.getMinutes();
     let amPM = hours < 12 ? "am" : "pm";
 
-    if (!standardTime) {
-      if (hours > 12) {
-        hours -= 12;
-      }
-      hours = hours.toString().padStart(2, 0);
+    if (standardTime && hours > 12) {
+      hours -= 12;
     }
-    minutes = minutes.toString().padStart(2, 0);
+    hours = hours.toString();
+
+    if (!standardTime) {
+      hours = hours.padStart(2, 0);
+    }
 
     setTime(time => ({
       hours,
