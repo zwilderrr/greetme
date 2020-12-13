@@ -15,10 +15,10 @@ export default function Greeting(props) {
     fetchData();
   }, []);
 
-  async function handleFormSubmit(e) {
+  function handleFormSubmit(e) {
     document.activeElement.blur();
     e.preventDefault();
-    await setChromeStorage(CHROME_KEYS.GREETING, { name });
+    setChromeStorage(CHROME_KEYS.GREETING, { name });
     setEditing(false);
   }
 

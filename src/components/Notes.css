@@ -1,0 +1,30 @@
+textarea {
+  width: 30vw;
+  height: 94vh;
+  resize: none;
+  padding: 10px;
+  border: none;
+  box-sizing: border-box;
+}
+
+.header {
+  padding: 10px;
+}
+
+.hide {
+  width: 0vw;
+  right: -30vw;
+}
+
+.notes-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  transition: 1s;
+  background: white;
+}
+
+.show {
+  width: 30vw;
+}
