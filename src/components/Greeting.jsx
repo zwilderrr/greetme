@@ -18,8 +18,8 @@ export default function Greeting(props) {
   async function handleFormSubmit(e) {
     document.activeElement.blur();
     e.preventDefault();
+    await setChromeStorage(CHROME_KEYS.GREETING, { name });
     setEditing(false);
-    setChromeStorage(CHROME_KEYS.GREETING, { name });
   }
 
   function getGreeting() {

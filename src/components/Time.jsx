@@ -3,24 +3,30 @@ import { CHROME_KEYS } from "../constants";
 import { setChromeStorage, getChromeStorage } from "../api/chrome-api";
 import "./Time.css";
 
+let timer;
+
 export default function Time() {
-  let timer;
   const [standardTime, setStandardTime] = useState(true);
   const [time, setTime] = useState({});
 
   useEffect(() => {
     async function fetchData() {
-      const storage = await getChromeStorage(CHROME_KEYS.GREETING);
+      const storage = await getChromeStorage(CHROME_KEYS.TIME);
       storage && setStandardTime(storage.standardTime);
     }
     fetchData();
-    getAndSetTime();
-    startClock();
 
     return () => clearInterval(timer);
   }, []);
 
+  useEffect(() => {
+    setChromeStorage(CHROME_KEYS.TIME, { standardTime });
+    getAndSetTime();
+    startClock();
+  }, [standardTime]);
+
   function startClock() {
+    clearInterval(timer);
     timer = setInterval(() => {
       getAndSetTime();
     }, 1000);
@@ -40,7 +46,6 @@ export default function Time() {
     if (!standardTime) {
       hours = hours.padStart(2, 0);
     }
-
     setTime(time => ({
       hours,
       minutes,
@@ -49,13 +54,20 @@ export default function Time() {
     }));
   }
 
+  async function handleStandardTime() {
+    setStandardTime(!standardTime);
+  }
+
   const { hours, minutes, amPM, showSeparator } = time;
   const separatorClass = showSeparator ? "separator" : "separator hide";
+  console.log("body", standardTime);
   return (
     <>
       {hours}
       <span className={separatorClass}>:</span>
-      {minutes} {standardTime && amPM}
+      {minutes}
+      {standardTime && amPM}
+      <button onClick={handleStandardTime}>set time </button>
     </>
   );
 }
