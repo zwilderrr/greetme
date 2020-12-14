@@ -1,19 +1,34 @@
 import React, { useState, useEffect } from "react";
 import { CHROME_KEYS } from "../constants";
+import { setChromeStorage, getChromeStorage } from "../api/chrome-api";
 import "./Notes.css";
 
 export default function Notes() {
-  // use the same logic as in the greeting component.
-  // wrap the textarea in a form tag that saves on submit
-
   const [show, setShow] = useState(true);
+  const [notes, setNotes] = useState("");
+
+  useEffect(() => {
+    async function fetchData() {
+      const storage = await getChromeStorage(CHROME_KEYS.NOTES);
+      storage.notes && setNotes(storage.notes);
+    }
+
+    fetchData();
+  }, []);
+
+  function handleFormSubmit(e) {
+    setChromeStorage(CHROME_KEYS.NOTES, { notes });
+  }
+
   return (
     <>
       <button onClick={() => setShow(!show)}>toggle</button>
       <div>text area is open: {show}</div>
       <div className={`notes-container ${show ? "show" : "hide"}`}>
         <div>header</div>
-        <textarea>lalala text area</textarea>
+        <form onBlur={handleFormSubmit}>
+          <textarea onChange={e => setNotes(e.target.value)} value={notes} />
+        </form>
       </div>
     </>
   );

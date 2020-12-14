@@ -60,7 +60,6 @@ export default function Time() {
 
   const { hours, minutes, amPM, showSeparator } = time;
   const separatorClass = showSeparator ? "separator" : "separator hide";
-  console.log("body", standardTime);
   return (
     <>
       {hours}
