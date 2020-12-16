@@ -11,8 +11,8 @@ export default function Time() {
 
   useEffect(() => {
     async function fetchData() {
-      const storage = await getChromeStorage(CHROME_KEYS.TIME);
-      storage && setStandardTime(storage.standardTime);
+      const { standardTime } = await getChromeStorage(CHROME_KEYS.TIME);
+      setStandardTime(standardTime);
     }
     fetchData();
 

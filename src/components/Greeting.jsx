@@ -9,8 +9,8 @@ export default function Greeting(props) {
 
   useEffect(() => {
     async function fetchData() {
-      const storage = await getChromeStorage(CHROME_KEYS.GREETING);
-      storage && setName(storage.name);
+      const { name } = await getChromeStorage(CHROME_KEYS.GREETING);
+      setName(name);
     }
     fetchData();
   }, []);
@@ -42,10 +42,10 @@ export default function Greeting(props) {
 
   return (
     <form
+      autoComplete={false}
       onSubmit={handleFormSubmit}
       onBlur={handleFormSubmit}
       onFocus={() => setEditing(true)}
-      autoComplete="off"
     >
       <input
         className="name"

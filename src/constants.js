@@ -15,5 +15,5 @@ export const DEFAULT_STATE = {
   [CHROME_KEYS.NOTES]: { showNotes: false, notes: "" },
   [CHROME_KEYS.TIME]: { showTime: true, standardTime: true },
   [CHROME_KEYS.GREETING]: { showGreeting: true, name: "" },
-  [CHROME_KEYS.GOALS]: { showGoals: true },
+  [CHROME_KEYS.GOALS]: { showGoals: true, goalOne: "", goalTwo: "" },
 };

@@ -9,8 +9,8 @@ export default function Notes() {
 
   useEffect(() => {
     async function fetchData() {
-      const storage = await getChromeStorage(CHROME_KEYS.NOTES);
-      storage.notes && setNotes(storage.notes);
+      const { notes } = await getChromeStorage(CHROME_KEYS.NOTES);
+      notes && setNotes(notes);
     }
 
     fetchData();
@@ -26,7 +26,7 @@ export default function Notes() {
       <div>text area is open: {show}</div>
       <div className={`notes-container ${show ? "show" : "hide"}`}>
         <div>header</div>
-        <form onBlur={handleFormSubmit}>
+        <form autoComplete={false} onBlur={handleFormSubmit}>
           <textarea onChange={e => setNotes(e.target.value)} value={notes} />
         </form>
       </div>

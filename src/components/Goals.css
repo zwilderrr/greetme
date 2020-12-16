@@ -1,0 +1,7 @@
+.goal {
+  transition: 0.3s;
+}
+
+.hidden {
+  opacity: 0;
+}
