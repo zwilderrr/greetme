@@ -55,7 +55,7 @@ export default function Background() {
 
   return (
     <>
-      <div>
+      <div onClick={() => !saved && handleFormSubmit()}>
         {imageLoading ? "loading image" : "image loaded"}
         <RefreshIcon htmlColor={"white"} />
       </div>
