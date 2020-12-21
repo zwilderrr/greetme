@@ -41,7 +41,7 @@ export default function Main() {
   const { showTime, showGreeting, showGoals, showNotes } = showState;
   return (
     <>
-      {/* <div>
+      <div>
         <Settings toggleHide={toggleHide} showState={showState} />
       </div>
 
@@ -51,7 +51,7 @@ export default function Main() {
 
       <div>{showGoals && <Goals />}</div>
 
-      <Notes showNotes={showNotes} /> */}
+      <Notes showNotes={showNotes} />
     </>
   );
 }
