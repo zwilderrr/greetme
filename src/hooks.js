@@ -12,3 +12,11 @@ export function useGetChromeStorage(chromeKey, key, defaultState = "") {
   }, []);
   return [state, setState];
 }
+
+export function useIgnoreFirstRender() {
+  const [firstRender, setFirstRender] = useState(true);
+  useEffect(() => setFirstRender(false), []);
+  return firstRender;
+}
+
+// export function useLoading

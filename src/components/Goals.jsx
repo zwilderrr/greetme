@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { setChromeStorage, getChromeStorage } from "../api/chrome-api";
-import { CHROME_KEYS } from "../constants";
-
 import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
+
+import { setChromeStorage, getChromeStorage } from "../api/chrome-api";
+import { CHROME_KEYS } from "../constants";
 
 import "./Goals.css";
 
@@ -33,16 +33,8 @@ export default function Goals() {
     fetchData();
   }, []);
 
-  // using useEffect to trigger formSubmit for goalComplete toggle,
-  // but not for goal text changes, so that I can await the
-  // setGoalComplete update. In the case of goal text changes,
-  // there's enough time between onChange and onSubmit for
-  // handleFormSubmit to have the most recent state values
   useEffect(() => {
-    // prevent submitting form with default state values
-    if (goalOneComplete !== undefined) {
-      handleFormSubmit();
-    }
+    handleFormSubmit();
   }, [goalOneComplete, goalTwoComplete]);
 
   function handleFormSubmit(e) {
@@ -90,6 +82,9 @@ export default function Goals() {
   return (
     <>
       <form
+        // calling handleFormSubmit directly for textual changes
+        // (instead of relying on useEffect) to avoid too many
+        // consecutive calls to chrome storage
         autoComplete={false}
         onSubmit={handleFormSubmit}
         onBlur={handleFormSubmit}
@@ -100,7 +95,7 @@ export default function Goals() {
         {goals.map(g => (
           <Goal {...g} />
         ))}
-        {/* forms with more than one input el need a submit button for onSubmit to work */}
+        {/* forms with more than one input el need a submit button for 'enter' to trigger onSubmit */}
         <button style={{ display: "none" }} type="submit" />
       </form>
     </>

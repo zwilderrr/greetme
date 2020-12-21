@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import { getChromeStorage, setChromeStorage } from "../api/chrome-api";
 import { CHROME_KEYS } from "../constants";
-import Search from "./Search";
 import Settings from "./Settings";
 import Time from "./Time";
 import Greeting from "./Greeting";
@@ -21,13 +20,16 @@ export default function Main() {
       const nextState = {};
       for (let key of Object.values(CHROME_KEYS)) {
         const showKey = makeShowKey(key);
-        nextState[showKey] = storage[key][showKey];
+        if (storage[key][showKey]) {
+          nextState[showKey] = storage[key][showKey];
+        }
       }
       setShowState(nextState);
     }
     getElementsToDisplay();
   }, []);
 
+  // refactor this to useEffect and set chrome storage after setState
   async function toggleHide(key, show) {
     const showKey = makeShowKey(key);
     await setChromeStorage(key, { [showKey]: show });
@@ -39,11 +41,7 @@ export default function Main() {
   const { showTime, showGreeting, showGoals, showNotes } = showState;
   return (
     <>
-      <div>
-        <Search />
-      </div>
-
-      <div>
+      {/* <div>
         <Settings toggleHide={toggleHide} showState={showState} />
       </div>
 
@@ -53,7 +51,7 @@ export default function Main() {
 
       <div>{showGoals && <Goals />}</div>
 
-      <Notes showNotes={showNotes} />
+      <Notes showNotes={showNotes} /> */}
     </>
   );
 }

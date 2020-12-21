@@ -16,12 +16,12 @@ export function getChromeStorage(key) {
   });
 }
 
-export async function setChromeStorage(key, update) {
+export async function setChromeStorage(key, update, log = false) {
   const current = await getChromeStorage(key);
   const next = { ...current, ...update };
   return new Promise((resolve, reject) => {
     chrome.storage.sync.set({ [key]: { ...next } }, () => {
-      logStorage();
+      log && logStorage();
       resolve();
     });
   });
