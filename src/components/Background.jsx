@@ -44,14 +44,6 @@ export default function Background() {
   }
 
   const PinIcon = saved ? PinFilled : PinOutlined;
-  const {
-    backgroundImage,
-    photographer,
-    profileLink,
-    downloadLocation,
-    photoLocation,
-    photoLink,
-  } = image;
 
   return (
     <>
@@ -73,11 +65,33 @@ export default function Background() {
         />
       </form>
 
+      <BackgroundImage {...image} setImageLoading={setImageLoading} />
+    </>
+  );
+}
+
+function BackgroundImage({
+  backgroundImage,
+  photographer,
+  profileLink,
+  downloadLocation,
+  photoLocation,
+  photoLink,
+  setImageLoading,
+}) {
+  return (
+    <>
       <img
         src={backgroundImage}
         alt=""
-        style={{ height: 200 }}
         onLoad={() => setImageLoading(false)}
+        style={{ display: "none" }}
+      />
+      <div
+        className="background-image"
+        style={{
+          backgroundImage: `url(${backgroundImage})`,
+        }}
       />
     </>
   );
