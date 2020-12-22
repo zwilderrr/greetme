@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useIgnoreFirstRender } from "../hooks";
 import { CHROME_KEYS } from "../constants";
 import { setChromeStorage, getChromeStorage } from "../api/chrome-api";
 import "./Notes.css";

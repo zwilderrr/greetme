@@ -6,7 +6,7 @@ import { CHROME_KEYS } from "../constants";
 import "./Background.css";
 import { PinOutlined, PinFilled } from "../pinIcons";
 
-export default function Background() {
+export default function Background({ showFly }) {
   const [query, setQuery] = useState("");
   const [saved, setSaved] = useState(false);
   const [image, setImage] = useState({});
@@ -65,7 +65,11 @@ export default function Background() {
         />
       </form>
 
-      <BackgroundImage {...image} setImageLoading={setImageLoading} />
+      <BackgroundImage
+        {...image}
+        setImageLoading={setImageLoading}
+        showFly={showFly}
+      />
     </>
   );
 }
@@ -77,11 +81,12 @@ function BackgroundImage({
   downloadLocation,
   photoLocation,
   photoLink,
+  showFly,
   setImageLoading,
 }) {
   return (
     <>
-      <img
+      {/* <img
         src={backgroundImage}
         alt=""
         onLoad={() => setImageLoading(false)}
@@ -90,9 +95,10 @@ function BackgroundImage({
       <div
         className="background-image"
         style={{
+          height: 200,
           backgroundImage: `url(${backgroundImage})`,
         }}
-      />
+      /> */}
     </>
   );
 }

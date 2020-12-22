@@ -17,18 +17,23 @@ export const CHROME_KEYS = {
   GOALS: "goals",
   NOTES: "notes",
   TIME: "time",
-  ZOOM: "zoom",
   GREETING: "greeting",
+  FLY: "fly",
 };
 
 export const DEFAULT_STATE = {
-  [CHROME_KEYS.SEARCH]: { query: "", saved: false },
-  [CHROME_KEYS.BACKGROUND]: getErrorImage(),
-  [CHROME_KEYS.ZOOM]: { showZoom: false },
-  [CHROME_KEYS.NOTES]: { showNotes: false, notes: "" },
-  [CHROME_KEYS.TIME]: { showTime: true, standardTime: true },
   [CHROME_KEYS.GREETING]: { showGreeting: true, name: "" },
+  [CHROME_KEYS.TIME]: { showTime: true, standardTime: true },
   [CHROME_KEYS.GOALS]: { showGoals: true, goalOne: "", goalTwo: "" },
+  [CHROME_KEYS.SEARCH]: { query: "", saved: false },
+  [CHROME_KEYS.NOTES]: { showNotes: false, notes: "" },
+  [CHROME_KEYS.FLY]: { showFly: false },
+  [CHROME_KEYS.BACKGROUND]: getErrorImage(),
 };
 
-export const QUERY = "query";
+export const SETTINGS = [
+  CHROME_KEYS.GREETING,
+  CHROME_KEYS.TIME,
+  CHROME_KEYS.GOALS,
+  CHROME_KEYS.FLY,
+];
