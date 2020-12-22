@@ -39,7 +39,7 @@ export default function App() {
     setChromeStorage(key, { [showKey]: nextBool });
   }
 
-  const { time, greeting, goals, fly } = show;
+  const { time, greeting, goals, fly, notes } = show;
 
   return (
     <>
@@ -53,7 +53,7 @@ export default function App() {
 
       <Background showFly={fly} />
 
-      <Notes />
+      <Notes showNotes={notes} />
     </>
   );
 }
