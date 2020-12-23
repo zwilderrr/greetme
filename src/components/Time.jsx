@@ -55,7 +55,7 @@ export default function Time() {
   }
 
   const { hours, minutes, amPM, showSeparator } = time;
-  const separatorClass = showSeparator ? "separator" : "separator hide";
+  const separatorClass = "separator" + (showSeparator ? " hide" : "");
   return (
     <div onClick={() => setStandardTime(!standardTime)}>
       {hours}

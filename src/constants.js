@@ -26,7 +26,7 @@ export const DEFAULT_STATE = {
   [CHROME_KEYS.TIME]: { showTime: true, standardTime: true },
   [CHROME_KEYS.GOALS]: { showGoals: true, goalOne: "", goalTwo: "" },
   [CHROME_KEYS.SEARCH]: { query: "", saved: false },
-  [CHROME_KEYS.NOTES]: { showNotes: false, notes: "" },
+  [CHROME_KEYS.NOTES]: { showNotes: false, notes: "", monospace: true },
   [CHROME_KEYS.FLY]: { showFly: false },
   [CHROME_KEYS.BACKGROUND]: getErrorImage(),
 };

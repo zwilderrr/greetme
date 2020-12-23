@@ -6,6 +6,10 @@
   margin-right: 16px;
 }
 
+.settings-container > div:hover {
+  cursor: pointer;
+}
+
 .settings-container > div:last-child {
   margin-right: 0;
 }

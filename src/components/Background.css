@@ -19,6 +19,12 @@
   fill: white;
 }
 
+.pin-icon,
+.rotate,
+.rotate-in:hover {
+  cursor: pointer;
+}
+
 .rotate {
   animation: rotate 0.7s cubic-bezier(0, 0.5, 1, 1) infinite;
 }

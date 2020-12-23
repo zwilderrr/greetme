@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { CHROME_KEYS, SETTINGS } from "../constants";
+import React from "react";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import { SETTINGS } from "../constants";
 
 import "./Settings.css";
 
 export default function Settings({ toggleHide, show }) {
   return (
     <div className="settings-container">
-      {SETTINGS.map(k => {
-        const className = show[k] ? "selected" : "";
+      {SETTINGS.map(s => {
+        const className = show[s] ? "selected" : "";
+        const setting = s === "notes" ? <ChevronLeftIcon /> : s;
         return (
-          <div className={className} onClick={() => toggleHide(k)}>
-            {k}
+          <div className={className} onClick={() => toggleHide(s)}>
+            {setting}
           </div>
         );
       })}
