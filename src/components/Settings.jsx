@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { CHROME_KEYS, SETTINGS } from "../constants";
 
-export default function Settings({ toggleHide }) {
+import "./Settings.css";
+
+export default function Settings({ toggleHide, show }) {
   return (
-    <>
+    <div className="settings-container">
       {SETTINGS.map(k => {
+        const className = show[k] ? "selected" : "";
         return (
-          <div>
-            <button onClick={() => toggleHide(k)}>toggle {k}</button>
+          <div className={className} onClick={() => toggleHide(k)}>
+            {k}
           </div>
         );
       })}
-    </>
+    </div>
   );
 }

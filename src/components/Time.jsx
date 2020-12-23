@@ -54,19 +54,14 @@ export default function Time() {
     }));
   }
 
-  async function handleStandardTime() {
-    setStandardTime(!standardTime);
-  }
-
   const { hours, minutes, amPM, showSeparator } = time;
   const separatorClass = showSeparator ? "separator" : "separator hide";
   return (
-    <>
+    <div onClick={() => setStandardTime(!standardTime)}>
       {hours}
       <span className={separatorClass}>:</span>
       {minutes}
       {standardTime && amPM}
-      <button onClick={handleStandardTime}>set time </button>
-    </>
+    </div>
   );
 }

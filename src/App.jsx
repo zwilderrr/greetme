@@ -6,7 +6,9 @@ import Time from "./components/Time";
 import Greeting from "./components/Greeting";
 import Goals from "./components/Goals";
 import Notes from "./components/Notes";
-import Background from "./components/Notes";
+import Background from "./components/Background";
+
+import "./App.css";
 
 // turns 'key' into 'showKey'. ex: goals -> showGoals
 const makeShowKey = s => "show" + s.charAt(0).toUpperCase() + s.slice(1);
@@ -28,6 +30,7 @@ export default function App() {
   }, []);
 
   function toggleHide(key) {
+    console.log(key, show, show[key]);
     const nextBool = !show[key];
     const showKey = makeShowKey(key);
 
@@ -43,17 +46,18 @@ export default function App() {
 
   return (
     <>
-      <Settings toggleHide={toggleHide} />
+      <div className="top-bar">
+        <Background showFly={fly} />
+        <Settings toggleHide={toggleHide} show={show} />
+      </div>
 
-      <div>{time && <Time />}</div>
+      {/* <div>{time && <Time />}</div>
 
       <div>{greeting && <Greeting />}</div>
 
-      <div>{goals && <Goals />}</div>
+      <div>{goals && <Goals />}</div> */}
 
-      <Background showFly={fly} />
-
-      <Notes showNotes={notes} />
+      <Notes showNotes={notes} toggleHide={toggleHide} />
     </>
   );
 }

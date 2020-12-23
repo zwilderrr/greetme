@@ -1,10 +1,7 @@
 .name {
-  color: white;
   width: 30vw;
-  background: transparent;
   border: solid thin transparent;
   text-align: center;
-  transition: 0.3s;
 }
 
 .name:focus {

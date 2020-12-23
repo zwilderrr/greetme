@@ -1,32 +1,38 @@
-.pin-icon {
-  width: 24px;
-  height: 24px;
-  transform: rotate(40deg);
-  margin: 1px 10px 0 0;
-  fill: white;
-}
-
 .background-image {
   background-position: 50% 50%;
   background-size: cover;
   height: 100vh;
   animation: fade-in 0.3s ease-in-out;
 }
-
-/*
-.background-image {
-  background-position: 50% 50%;
-  background-size: cover;
-  height: 100vh;
-  width: 100vw;
-  position: absolute;
-  top: 0;
-  z-index: -1;
+.query {
+  width: 110px;
+  border: solid thin;
+  padding: 5px;
+  text-overflow: ellipsis;
 }
-*/
+
+.pin-icon {
+  width: 24px;
+  height: 24px;
+  transform: rotate(40deg);
+  margin: 1px -5px 0 0;
+  fill: white;
+}
 
 .rotate {
   animation: rotate 0.7s cubic-bezier(0, 0.5, 1, 1) infinite;
+}
+
+.rotate-in {
+  animation: rotate 0.7s cubic-bezier(0, 0.5, 1, 1) 1;
+}
+
+.search-container {
+  display: flex;
+}
+
+.search-container > * {
+  margin-right: 18px;
 }
 
 @keyframes rotate {

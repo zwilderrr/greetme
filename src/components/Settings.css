@@ -1,0 +1,15 @@
+.settings-container {
+  display: flex;
+}
+
+.settings-container > div {
+  margin-right: 16px;
+}
+
+.settings-container > div:last-child {
+  margin-right: 0;
+}
+
+.selected {
+  text-decoration: overline;
+}

@@ -3,8 +3,8 @@ import RefreshIcon from "@material-ui/icons/Refresh";
 import { getChromeStorage, setChromeStorage } from "../api/chrome-api";
 import { fetchImage } from "../api/unsplash-api";
 import { CHROME_KEYS } from "../constants";
-import "./Background.css";
 import { PinOutlined, PinFilled } from "../pinIcons";
+import "./Background.css";
 
 export default function Background({ showFly }) {
   const [query, setQuery] = useState("");
@@ -44,26 +44,26 @@ export default function Background({ showFly }) {
   }
 
   const PinIcon = saved ? PinFilled : PinOutlined;
-
+  const refreshIconClass = imageLoading ? "rotate" : "rotate-in";
   return (
     <>
-      <div onClick={() => !saved && handleFormSubmit()}>
-        {imageLoading ? "loading image" : "image loaded"}
-        <RefreshIcon htmlColor={"white"} />
+      <div className="search-container">
+        <form autoComplete={false} onSubmit={handleFormSubmit}>
+          <input
+            className="query"
+            onChange={e => setQuery(e.target.value)}
+            value={query}
+            placeholder="Search for..."
+            disabled={saved}
+          />
+        </form>
+        <div onClick={() => query && setSaved(!saved)}>
+          <PinIcon className="pin-icon" />
+        </div>
+        <div onClick={() => !saved && handleFormSubmit()}>
+          <RefreshIcon className={refreshIconClass} htmlColor={"white"} />
+        </div>
       </div>
-      <div onClick={() => query && setSaved(!saved)}>
-        <PinIcon className="pin-icon" />
-      </div>
-
-      <form autoComplete={false} onSubmit={handleFormSubmit}>
-        <input
-          className="query"
-          onChange={e => setQuery(e.target.value)}
-          value={query}
-          placeholder="Search for..."
-          disabled={saved}
-        />
-      </form>
 
       <BackgroundImage
         {...image}
