@@ -24,7 +24,13 @@ export const CHROME_KEYS = {
 export const DEFAULT_STATE = {
   [CHROME_KEYS.GREETING]: { showGreeting: true, name: "" },
   [CHROME_KEYS.TIME]: { showTime: true, standardTime: true },
-  [CHROME_KEYS.GOALS]: { showGoals: true, goalOne: "", goalTwo: "" },
+  [CHROME_KEYS.GOALS]: {
+    showGoals: true,
+    goalOne: "",
+    goalOneComplete: false,
+    goalTwo: "",
+    goalTwoComplete: false,
+  },
   [CHROME_KEYS.SEARCH]: { query: "", saved: false },
   [CHROME_KEYS.NOTES]: { showNotes: false, notes: "", monospace: true },
   [CHROME_KEYS.FLY]: { showFly: false },

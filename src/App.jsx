@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { getChromeStorage, setChromeStorage } from "./api/chrome-api";
-import { CHROME_KEYS, SETTINGS } from "./constants";
-import Settings from "./components/Settings";
+import { SETTINGS } from "./constants";
+import TopBar from "./components/TopBar";
 import Time from "./components/Time";
 import Greeting from "./components/Greeting";
 import Goals from "./components/Goals";
 import Notes from "./components/Notes";
-import Background from "./components/Background";
 
 import "./App.css";
 
@@ -30,32 +29,29 @@ export default function App() {
   }, []);
 
   function toggleHide(key) {
-    console.log(key, show, show[key]);
     const nextBool = !show[key];
     const showKey = makeShowKey(key);
 
+    setChromeStorage(key, { [showKey]: nextBool });
     setShow(show => ({
       ...show,
       [key]: nextBool,
     }));
-
-    setChromeStorage(key, { [showKey]: nextBool });
   }
 
-  const { time, greeting, goals, fly, notes } = show;
+  const { time, greeting, goals, notes } = show;
 
   return (
     <>
-      <div className="top-bar">
-        <Background showFly={fly} />
-        <Settings toggleHide={toggleHide} show={show} />
-      </div>
+      <TopBar toggleHide={toggleHide} show={show} />
 
-      {/* <div>{time && <Time />}</div>
+      <pre>{JSON.stringify(show, undefined, 2)}</pre>
+
+      <div>{time && <Time />}</div>
 
       <div>{greeting && <Greeting />}</div>
 
-      <div>{goals && <Goals />}</div> */}
+      <div>{goals && <Goals />}</div>
 
       <Notes showNotes={notes} toggleHide={toggleHide} />
     </>

@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import { useSkipFirstRender } from "../hooks";
 import { getChromeStorage, setChromeStorage } from "../api/chrome-api";
 import { fetchImage } from "../api/unsplash-api";
 import { CHROME_KEYS } from "../constants";
 import { PinOutlined, PinFilled } from "../pinIcons";
-import "./Background.css";
+import { SETTINGS } from "../constants";
+import "./TopBar.css";
 
-export default function Background({ showFly }) {
+export default function TopBar({ toggleHide, show }) {
   const [query, setQuery] = useState("");
   const [saved, setSaved] = useState(false);
   const [image, setImage] = useState({});
@@ -48,35 +50,49 @@ export default function Background({ showFly }) {
   const refreshIconClass = imageLoading ? "rotate-in" : "rotate-in";
   // const refreshIconClass = imageLoading ? "rotate" : "rotate-in";
   return (
-    <>
-      <div className="search-container">
-        <form
-          autoComplete={false}
-          onSubmit={handleFormSubmit}
-          onBlur={handleFormSubmit}
-        >
-          <input
-            className="query"
-            onChange={e => setQuery(e.target.value)}
-            value={query}
-            placeholder="Search for..."
-            disabled={saved}
-          />
-        </form>
-        <div onClick={() => query && setSaved(!saved)}>
-          <PinIcon className="pin-icon" />
+    <div>
+      <div className="top-bar">
+        <div className="search-container">
+          <form
+            autoComplete={false}
+            onSubmit={handleFormSubmit}
+            onBlur={handleFormSubmit}
+          >
+            <input
+              className="query"
+              onChange={e => setQuery(e.target.value)}
+              value={query}
+              placeholder="Search for..."
+              disabled={saved}
+            />
+          </form>
+          <div onClick={() => query && setSaved(!saved)}>
+            <PinIcon className="pin-icon" />
+          </div>
+          <div onClick={() => !saved && handleFormSubmit()}>
+            <RefreshIcon className={refreshIconClass} htmlColor={"white"} />
+          </div>
         </div>
-        <div onClick={() => !saved && handleFormSubmit()}>
-          <RefreshIcon className={refreshIconClass} htmlColor={"white"} />
+
+        <div className="settings-container">
+          {SETTINGS.map(s => {
+            const className = show[s] ? "selected" : "";
+            const setting = s === "notes" ? <ChevronLeftIcon /> : s;
+            return (
+              <div className={className} onClick={() => toggleHide(s)}>
+                {setting}
+              </div>
+            );
+          })}
         </div>
       </div>
 
       <BackgroundImage
         {...image}
         setImageLoading={setImageLoading}
-        showFly={showFly}
+        fly={show.fly}
       />
-    </>
+    </div>
   );
 }
 
@@ -87,7 +103,7 @@ function BackgroundImage({
   downloadLocation,
   photoLocation,
   photoLink,
-  showFly,
+  fly,
   setImageLoading,
 }) {
   return (

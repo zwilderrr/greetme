@@ -41,6 +41,33 @@
   margin-right: 18px;
 }
 
+.settings-container {
+  display: flex;
+}
+
+.settings-container > div {
+  margin-right: 18px;
+}
+
+.settings-container > div:hover {
+  cursor: pointer;
+}
+
+.settings-container > div:last-child {
+  margin-right: 0;
+}
+
+.selected {
+  text-decoration: overline;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 5px 16px;
+}
+
 @keyframes rotate {
   to {
     transform: rotate(360deg);

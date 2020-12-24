@@ -40,6 +40,11 @@
   font-family: "Roboto Mono";
 }
 
+.monospace,
+.chevron:hover {
+  cursor: pointer;
+}
+
 .selected {
   text-decoration: overline;
 }

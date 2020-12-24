@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import { CHROME_KEYS } from "../constants";
+import { useSkipFirstRender } from "../hooks";
 import { setChromeStorage, getChromeStorage } from "../api/chrome-api";
 import "./Notes.css";
 
@@ -18,7 +19,7 @@ export default function Notes({ showNotes, toggleHide }) {
     fetchData();
   }, []);
 
-  useEffect(() => {
+  useSkipFirstRender(() => {
     setChromeStorage(CHROME_KEYS.NOTES, { monospace });
   }, [monospace]);
 
@@ -41,7 +42,10 @@ export default function Notes({ showNotes, toggleHide }) {
           {"</>"}
         </div>
         <div className="title">Notes</div>
-        <ChevronRightIcon onClick={() => toggleHide(CHROME_KEYS.NOTES)} />
+        <ChevronRightIcon
+          className="chevron"
+          onClick={() => toggleHide(CHROME_KEYS.NOTES)}
+        />
       </div>
       <form autoComplete={false} onBlur={handleFormSubmit}>
         <textarea

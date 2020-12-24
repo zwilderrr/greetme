@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { CHROME_KEYS } from "../constants";
 import { setChromeStorage, getChromeStorage } from "../api/chrome-api";
+import { useSkipFirstRender } from "../hooks";
 import "./Time.css";
 
 let timer;
@@ -13,13 +14,15 @@ export default function Time() {
     async function fetchData() {
       const { standardTime } = await getChromeStorage(CHROME_KEYS.TIME);
       setStandardTime(standardTime);
+      getAndSetTime();
+      startClock();
     }
     fetchData();
 
     return () => clearInterval(timer);
   }, []);
 
-  useEffect(() => {
+  useSkipFirstRender(() => {
     setChromeStorage(CHROME_KEYS.TIME, { standardTime });
     getAndSetTime();
     startClock();
@@ -57,6 +60,7 @@ export default function Time() {
   const { hours, minutes, amPM, showSeparator } = time;
   const separatorClass = "separator" + (showSeparator ? " hide" : "");
   return (
+    // bug here
     <div onClick={() => setStandardTime(!standardTime)}>
       {hours}
       <span className={separatorClass}>:</span>

@@ -4,6 +4,7 @@ import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
 
 import { setChromeStorage, getChromeStorage } from "../api/chrome-api";
 import { CHROME_KEYS } from "../constants";
+import { useSkipFirstRender } from "../hooks";
 
 import "./Goals.css";
 
@@ -12,10 +13,10 @@ export default function Goals() {
   const [hovering, setHovering] = useState(false);
 
   const [goalOne, setGoalOne] = useState("");
-  const [goalOneComplete, setGoalOneComplete] = useState(undefined);
+  const [goalOneComplete, setGoalOneComplete] = useState(false);
 
   const [goalTwo, setGoalTwo] = useState("");
-  const [goalTwoComplete, setGoalTwoComplete] = useState(undefined);
+  const [goalTwoComplete, setGoalTwoComplete] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -33,20 +34,20 @@ export default function Goals() {
     fetchData();
   }, []);
 
-  useEffect(() => {
+  useSkipFirstRender(() => {
     handleFormSubmit();
   }, [goalOneComplete, goalTwoComplete]);
 
   function handleFormSubmit(e) {
     document.activeElement.blur();
     e && e.preventDefault();
+    setEditing(false);
     setChromeStorage(CHROME_KEYS.GOALS, {
       goalOne,
       goalOneComplete,
       goalTwo,
       goalTwoComplete,
     });
-    setEditing(false);
   }
 
   const goalOneDisabled = goalOneComplete;
@@ -107,10 +108,10 @@ function Goal({ onClick, goalCompleted, show, ...rest }) {
     ? CheckCircleOutlineIcon
     : RadioButtonUncheckedIcon;
 
-  const cssClass = show ? "goal" : "goal hidden";
+  const goalCssClass = show ? "goal" : "goal hidden";
 
   return (
-    <div className={cssClass}>
+    <div className={goalCssClass}>
       <div onClick={() => onClick(goalCompleted)}>
         <RadioButton />
       </div>
