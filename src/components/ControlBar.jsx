@@ -7,9 +7,9 @@ import { fetchImage } from "../api/unsplash-api";
 import { CHROME_KEYS } from "../constants";
 import { PinOutlined, PinFilled } from "../pinIcons";
 import { SETTINGS } from "../constants";
-import "./TopBar.css";
+import "./ControlBar.css";
 
-export default function TopBar({ toggleHide, show }) {
+export default function ControlBar({ toggleHide, show }) {
   const [query, setQuery] = useState("");
   const [saved, setSaved] = useState(false);
   const [image, setImage] = useState({});
@@ -47,8 +47,7 @@ export default function TopBar({ toggleHide, show }) {
   }
 
   const PinIcon = saved ? PinFilled : PinOutlined;
-  const refreshIconClass = imageLoading ? "rotate-in" : "rotate-in";
-  // const refreshIconClass = imageLoading ? "rotate" : "rotate-in";
+  const refreshIconClass = imageLoading ? "rotate" : "rotate-in";
   return (
     <div>
       <div className="top-bar">
@@ -87,16 +86,13 @@ export default function TopBar({ toggleHide, show }) {
         </div>
       </div>
 
-      <BackgroundImage
-        {...image}
-        setImageLoading={setImageLoading}
-        fly={show.fly}
-      />
+      <Background {...image} setImageLoading={setImageLoading} fly={show.fly} />
     </div>
   );
 }
 
-function BackgroundImage({
+// put in seperate file
+function Background({
   backgroundImage,
   photographer,
   profileLink,

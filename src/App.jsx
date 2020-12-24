@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getChromeStorage, setChromeStorage } from "./api/chrome-api";
 import { SETTINGS } from "./constants";
-import TopBar from "./components/TopBar";
+import ControlBar from "./components/ControlBar";
 import Time from "./components/Time";
 import Greeting from "./components/Greeting";
 import Goals from "./components/Goals";
@@ -43,7 +43,7 @@ export default function App() {
 
   return (
     <>
-      <TopBar toggleHide={toggleHide} show={show} />
+      <ControlBar toggleHide={toggleHide} show={show} />
 
       <pre>{JSON.stringify(show, undefined, 2)}</pre>
 
