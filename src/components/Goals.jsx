@@ -18,6 +18,8 @@ export default function Goals() {
   const [goalTwo, setGoalTwo] = useState("");
   const [goalTwoComplete, setGoalTwoComplete] = useState(false);
 
+  const [duration, setDuration] = useState("today");
+
   useEffect(() => {
     async function fetchData() {
       const {
@@ -25,11 +27,13 @@ export default function Goals() {
         goalOneComplete,
         goalTwo,
         goalTwoComplete,
+        duration,
       } = await getChromeStorage(CHROME_KEYS.GOALS);
       setGoalOne(goalOne);
       setGoalOneComplete(goalOneComplete);
       setGoalTwo(goalTwo);
       setGoalTwoComplete(goalTwoComplete);
+      setDuration(duration);
     }
     fetchData();
   }, []);
@@ -81,7 +85,8 @@ export default function Goals() {
   ];
 
   return (
-    <>
+    <div className="goals-container">
+      <div className="duration">{duration}</div>
       <form
         // calling handleFormSubmit directly for textual changes
         // (instead of relying on useEffect) to avoid too many
@@ -93,13 +98,15 @@ export default function Goals() {
         onMouseEnter={() => setHovering(true)}
         onMouseLeave={() => setHovering(false)}
       >
-        {goals.map(g => (
-          <Goal {...g} />
-        ))}
+        <div className="goals">
+          {goals.map(g => (
+            <Goal {...g} />
+          ))}
+        </div>
         {/* forms with more than one input el need a submit button for 'enter' to trigger onSubmit */}
         <button style={{ display: "none" }} type="submit" />
       </form>
-    </>
+    </div>
   );
 }
 

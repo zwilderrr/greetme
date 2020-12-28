@@ -45,8 +45,7 @@ export default function Background({ showFly }) {
   }
 
   const PinIcon = saved ? PinFilled : PinOutlined;
-  const refreshIconClass = imageLoading ? "rotate-in" : "rotate-in";
-  // const refreshIconClass = imageLoading ? "rotate" : "rotate-in";
+  const refreshIconClass = imageLoading ? "rotate" : "rotate-in";
   return (
     <>
       <div className="search-container">

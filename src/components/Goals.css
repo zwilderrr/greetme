@@ -1,5 +1,15 @@
+.goals-container {
+  display: flex;
+}
+
 .goal {
   transition: 0.3s;
+  display: flex;
+}
+
+/* align the radio button with the input */
+.goal > div {
+  display: flex;
 }
 
 .hidden {

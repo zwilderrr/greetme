@@ -24,18 +24,22 @@ export default function Time() {
 
   useSkipFirstRender(() => {
     setChromeStorage(CHROME_KEYS.TIME, { standardTime });
+    // console.log("calling get and set time from useSkip", standardTime);
     getAndSetTime();
+    // console.log("calling startClock from useSkip", standardTime);
     startClock();
   }, [standardTime]);
 
   function startClock() {
     clearInterval(timer);
     timer = setInterval(() => {
+      // console.log("calling get and set time from set Interval", standardTime);
       getAndSetTime();
     }, 1000);
   }
 
   function getAndSetTime() {
+    // console.log("in get and set time", standardTime);
     const date = new Date();
     let minutes = date.getMinutes().toString().padStart(2, 0);
     let hours = date.getHours();
@@ -61,7 +65,11 @@ export default function Time() {
   const separatorClass = "separator" + (showSeparator ? " hide" : "");
 
   return (
-    <div onClick={() => setStandardTime(!standardTime)}>
+    // bug here. when you set to 24h time and open a new tab
+    <div
+      className="time-container"
+      onClick={() => setStandardTime(!standardTime)}
+    >
       {hours}
       <span className={separatorClass}>:</span>
       {minutes}

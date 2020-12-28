@@ -47,10 +47,11 @@ export default function ControlBar({ toggleHide, show }) {
   }
 
   const PinIcon = saved ? PinFilled : PinOutlined;
-  const refreshIconClass = imageLoading ? "rotate" : "rotate-in";
+  // const refreshIconClass = imageLoading ? "rotate" : "rotate-in";
+  const refreshIconClass = imageLoading ? "rotate-in" : "rotate-in";
   return (
     <div>
-      <div className="top-bar">
+      <div className="control-bar">
         <div className="search-container">
           <form
             autoComplete={false}
@@ -105,7 +106,7 @@ function Background({
   return (
     <>
       <img
-        src={backgroundImage}
+        // src={backgroundImage}
         alt=""
         onLoad={() => setImageLoading(false)}
         style={{ display: "none" }}
@@ -114,7 +115,7 @@ function Background({
         className="background-image"
         style={{
           height: 200,
-          backgroundImage: `url(${backgroundImage})`,
+          // backgroundImage: `url(${backgroundImage})`,
         }}
       />
     </>

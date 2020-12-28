@@ -45,13 +45,11 @@ export default function App() {
     <>
       <ControlBar toggleHide={toggleHide} show={show} />
 
-      <pre>{JSON.stringify(show, undefined, 2)}</pre>
+      <div className="layout-time">{time && <Time />}</div>
 
-      <div>{time && <Time />}</div>
+      <div className="layout-greeting">{greeting && <Greeting />}</div>
 
-      <div>{greeting && <Greeting />}</div>
-
-      <div>{goals && <Goals />}</div>
+      <div className="layout-goals">{goals && <Goals />}</div>
 
       <Notes showNotes={notes} toggleHide={toggleHide} />
     </>

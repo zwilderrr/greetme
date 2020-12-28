@@ -1,0 +1,5 @@
+div[class^="layout"] {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}

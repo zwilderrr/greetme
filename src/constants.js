@@ -30,6 +30,7 @@ export const DEFAULT_STATE = {
     goalOneComplete: false,
     goalTwo: "",
     goalTwoComplete: false,
+    duration: "today",
   },
   [CHROME_KEYS.SEARCH]: { query: "", saved: false },
   [CHROME_KEYS.NOTES]: { showNotes: false, notes: "", monospace: true },
