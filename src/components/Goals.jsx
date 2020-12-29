@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
 
+import { ExpandingInput } from "./ExpandingInput";
+
 import { setChromeStorage, getChromeStorage } from "../api/chrome-api";
 import { CHROME_KEYS } from "../constants";
 import { useSkipFirstRender } from "../hooks";
@@ -87,25 +89,25 @@ export default function Goals() {
   return (
     <div className="goals-container">
       <div className="duration">{duration}</div>
-      <form
-        // calling handleFormSubmit directly for textual changes
-        // (instead of relying on useEffect) to avoid too many
-        // consecutive calls to chrome storage
-        autoComplete={false}
-        onSubmit={handleFormSubmit}
-        onBlur={handleFormSubmit}
-        onFocus={() => setEditing(true)}
-        onMouseEnter={() => setHovering(true)}
-        onMouseLeave={() => setHovering(false)}
-      >
-        <div className="goals">
+      <div className="goals">
+        <form
+          // calling handleFormSubmit directly for textual changes
+          // (instead of relying on useEffect) to avoid too many
+          // consecutive calls to chrome storage
+          autoComplete={false}
+          onSubmit={handleFormSubmit}
+          onBlur={handleFormSubmit}
+          onFocus={() => setEditing(true)}
+          onMouseEnter={() => setHovering(true)}
+          onMouseLeave={() => setHovering(false)}
+        >
           {goals.map(g => (
             <Goal {...g} />
           ))}
-        </div>
-        {/* forms with more than one input el need a submit button for 'enter' to trigger onSubmit */}
-        <button style={{ display: "none" }} type="submit" />
-      </form>
+          {/* forms with more than one input el need a submit button for 'enter' to trigger onSubmit */}
+          <button style={{ display: "none" }} type="submit" />
+        </form>
+      </div>
     </div>
   );
 }
@@ -118,11 +120,15 @@ function Goal({ onClick, goalCompleted, show, ...rest }) {
   const goalCssClass = show ? "goal" : "goal hidden";
 
   return (
+    // second goal is always showing when there's a first goal
+    // should only show on hover
+    // gut then the placeholder-show selector is going to expand
+    // the div if goal one is less than 29vw
     <div className={goalCssClass}>
       <div onClick={() => onClick(goalCompleted)}>
         <RadioButton />
       </div>
-      <input {...rest} />
+      <ExpandingInput {...rest} />
     </div>
   );
 }

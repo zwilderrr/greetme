@@ -1,9 +1,16 @@
 .name {
-  width: 30vw;
+  width: 90vw;
   border: solid thin transparent;
   text-align: center;
+  font-size: 6vw;
+  margin-bottom: 10px;
 }
 
 .name:focus {
   border-bottom: solid thin white;
+  width: 50vw;
+}
+
+.name:placeholder-shown {
+  width: 52vw;
 }

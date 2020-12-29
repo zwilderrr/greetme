@@ -1,6 +1,6 @@
 body {
   color: white;
-  font-family: "Hind Madurai", sans-serif !important;
+  font-family: "Hind Madurai", sans-serif;
   font-size: 14px;
   margin: 0;
   overflow: hidden;
@@ -12,10 +12,10 @@ input,
 textarea,
 button {
   border: none;
-  padding: none;
   color: white;
   background: transparent;
   transition: 0.3s;
+  font-family: "Hind Madurai";
 }
 
 input:focus,

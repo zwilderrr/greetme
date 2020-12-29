@@ -45,3 +45,5 @@ export const SETTINGS = [
   CHROME_KEYS.FLY,
   CHROME_KEYS.NOTES,
 ];
+
+export const BLANK_GOAL_WIDTH = 29; // vw
