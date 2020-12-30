@@ -4,7 +4,6 @@
 
 .goals {
   margin-top: 1px;
-  /* max-width: 85vw; */
 }
 
 .goals-container {
@@ -21,6 +20,10 @@
   transition: 0.3s;
   display: flex;
   align-items: center;
+}
+
+.goal input:disabled {
+  text-decoration: line-through;
 }
 
 /* align the radio button with the input */

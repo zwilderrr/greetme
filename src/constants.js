@@ -46,6 +46,6 @@ export const SETTINGS = [
   CHROME_KEYS.NOTES,
 ];
 
-export const MAX_GOAL_WIDTH = 85; // vw
-export const MIN_GOAL_WIDTH = 16.2; // vw
-export const PLACEHOLDER_GOAL_WIDTH = 29; // vw
+export const MAX_GOAL_WIDTH = "85vw";
+export const GOAL_ONE_PLACEHOLDER_WIDTH = "29vw";
+export const GOAL_TWO_PLACEHOLDER_WIDTH = "16.2vw";

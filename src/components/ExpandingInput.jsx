@@ -14,7 +14,7 @@ const inputStyles = {
 
 export function ExpandingInput({
   value,
-  placeholderWidthInVW,
+  placeholderWidth,
   styles: propStyles,
   ...rest
 }) {
@@ -27,7 +27,7 @@ export function ExpandingInput({
   }, [value]);
 
   function getInputWidth(value, shadowRef) {
-    if (!value || !shadowRef.current) return placeholderWidthInVW + "vw";
+    if (!value || !shadowRef.current) return placeholderWidth;
 
     const viewportWidth = window.innerWidth;
     const shadowDivWidth = shadowRef.current.getBoundingClientRect().width;

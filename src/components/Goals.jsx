@@ -7,9 +7,9 @@ import { ExpandingInput } from "./ExpandingInput";
 import { setChromeStorage, getChromeStorage } from "../api/chrome-api";
 import {
   CHROME_KEYS,
-  MIN_GOAL_WIDTH,
   MAX_GOAL_WIDTH,
-  PLACEHOLDER_GOAL_WIDTH,
+  GOAL_ONE_PLACEHOLDER_WIDTH,
+  GOAL_TWO_PLACEHOLDER_WIDTH,
 } from "../constants";
 import { useSkipFirstRender } from "../hooks";
 
@@ -78,9 +78,9 @@ export default function Goals() {
       placeholder: "What are you striving for?",
       disabled: goalOneDisabled,
       goalCompleted: goalOneComplete,
-      placeholderWidthInVW: 29,
+      placeholderWidth: GOAL_ONE_PLACEHOLDER_WIDTH,
       styles: {
-        maxWidth: "85vw",
+        maxWidth: MAX_GOAL_WIDTH,
       },
       show: true,
     },
@@ -91,9 +91,9 @@ export default function Goals() {
       placeholder: "Going for two?",
       disabled: goalTwoDisabled,
       goalCompleted: goalTwoComplete,
-      placeholderWidthInVW: 16.2,
+      placeholderWidth: GOAL_TWO_PLACEHOLDER_WIDTH,
       styles: {
-        maxWidth: "85vw",
+        maxWidth: MAX_GOAL_WIDTH,
       },
       show: editing || goalTwo || (goalOne && hovering),
     },
