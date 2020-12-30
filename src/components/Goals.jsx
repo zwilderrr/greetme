@@ -5,7 +5,12 @@ import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
 import { ExpandingInput } from "./ExpandingInput";
 
 import { setChromeStorage, getChromeStorage } from "../api/chrome-api";
-import { CHROME_KEYS, BLANK_GOAL_WIDTH, MAX_GOAL_WIDTH } from "../constants";
+import {
+  CHROME_KEYS,
+  MIN_GOAL_WIDTH,
+  MAX_GOAL_WIDTH,
+  PLACEHOLDER_GOAL_WIDTH,
+} from "../constants";
 import { useSkipFirstRender } from "../hooks";
 
 import "./Goals.css";
@@ -73,8 +78,10 @@ export default function Goals() {
       placeholder: "What are you striving for?",
       disabled: goalOneDisabled,
       goalCompleted: goalOneComplete,
-      maxWidthInVW: MAX_GOAL_WIDTH,
-      minWidthInVW: BLANK_GOAL_WIDTH,
+      placeholderWidthInVW: 29,
+      styles: {
+        maxWidth: "85vw",
+      },
       show: true,
     },
     {
@@ -84,8 +91,10 @@ export default function Goals() {
       placeholder: "Going for two?",
       disabled: goalTwoDisabled,
       goalCompleted: goalTwoComplete,
-      maxWidthInVW: MAX_GOAL_WIDTH,
-      minWidthInVW: BLANK_GOAL_WIDTH,
+      placeholderWidthInVW: 16.2,
+      styles: {
+        maxWidth: "85vw",
+      },
       show: editing || goalTwo || (goalOne && hovering),
     },
   ];

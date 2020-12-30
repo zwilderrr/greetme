@@ -8,16 +8,18 @@ const shadowDivStyles = {
   overflow: "hidden",
 };
 
+const inputStyles = {
+  textOverflow: "ellipsis",
+};
+
 export function ExpandingInput({
   value,
-  maxWidthInVW,
-  minWidthInVW,
+  placeholderWidthInVW,
   styles: propStyles,
   ...rest
 }) {
-  const minWidthVW = minWidthInVW + "vw";
   const shadowRef = useRef(null);
-  const [width, setWidth] = useState(minWidthVW);
+  const [width, setWidth] = useState();
 
   useEffect(() => {
     const nextWidth = getInputWidth(value, shadowRef);
@@ -25,22 +27,22 @@ export function ExpandingInput({
   }, [value]);
 
   function getInputWidth(value, shadowRef) {
-    if (!value || !shadowRef.current) return minWidthVW;
+    if (!value || !shadowRef.current) return placeholderWidthInVW + "vw";
 
     const viewportWidth = window.innerWidth;
     const shadowDivWidth = shadowRef.current.getBoundingClientRect().width;
     const shadowDivWidthInVW = (shadowDivWidth / viewportWidth) * 100 + 2;
 
-    if (shadowDivWidthInVW < minWidthInVW) {
-      return minWidthVW;
-    }
-
-    return Math.min(shadowDivWidthInVW, maxWidthInVW) + "vw";
+    return shadowDivWidthInVW + "vw";
   }
 
   return (
     <>
-      <input style={{ width, ...propStyles }} value={value} {...rest} />
+      <input
+        style={{ ...inputStyles, ...propStyles, width }}
+        value={value}
+        {...rest}
+      />
       <div ref={shadowRef} style={{ ...propStyles, ...shadowDivStyles }}>
         {value}
       </div>

@@ -5,6 +5,7 @@ div[class^="layout"] {
 }
 
 .layout-greeting,
-.layout-goals {
+.layout-goals,
+.layout-time {
   top: 59vh;
 }
