@@ -86,7 +86,7 @@ export default function Goals() {
       goalCompleted: goalTwoComplete,
       maxWidthInVW: MAX_GOAL_WIDTH,
       minWidthInVW: BLANK_GOAL_WIDTH,
-      show: editing || hovering || goalOne || goalTwo,
+      show: editing || goalTwo || (goalOne && hovering),
     },
   ];
 
