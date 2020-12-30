@@ -23,7 +23,7 @@
 }
 
 /* align the radio button with the input */
-.goal > div {
+.goal > .radio-button {
   display: flex;
   margin-right: 2px;
 }

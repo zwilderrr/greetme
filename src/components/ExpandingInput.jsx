@@ -1,15 +1,23 @@
 import React, { useState, useEffect, useRef } from "react";
-import { BLANK_GOAL_WIDTH } from "../constants";
 
-const styles = {
-  position: "absolute",
-  bottom: "-100vw",
+const shadowDivStyles = {
+  position: "fixed",
+  bottom: "-50vh",
+  left: 0,
+  whiteSpace: "nowrap",
+  overflow: "hidden",
 };
 
-export function ExpandingInput({ value, ...rest }) {
-  const blankGoalWidthInVW = BLANK_GOAL_WIDTH + "vw";
+export function ExpandingInput({
+  value,
+  maxWidthInVW,
+  minWidthInVW,
+  styles: propStyles,
+  ...rest
+}) {
+  const minWidthVW = minWidthInVW + "vw";
   const shadowRef = useRef(null);
-  const [width, setWidth] = useState(blankGoalWidthInVW);
+  const [width, setWidth] = useState(minWidthVW);
 
   useEffect(() => {
     const nextWidth = getInputWidth(value, shadowRef);
@@ -17,22 +25,23 @@ export function ExpandingInput({ value, ...rest }) {
   }, [value]);
 
   function getInputWidth(value, shadowRef) {
-    if (!value || !shadowRef.current) return blankGoalWidthInVW;
+    if (!value || !shadowRef.current) return minWidthVW;
 
     const viewportWidth = window.innerWidth;
-    const shadowGoalWidth = shadowRef.current.getBoundingClientRect().width;
-    const widthInVW = (shadowGoalWidth / viewportWidth) * 100 + 2;
+    const shadowDivWidth = shadowRef.current.getBoundingClientRect().width;
+    const shadowDivWidthInVW = (shadowDivWidth / viewportWidth) * 100 + 2;
 
-    if (widthInVW < BLANK_GOAL_WIDTH) {
-      return blankGoalWidthInVW;
+    if (shadowDivWidthInVW < minWidthInVW) {
+      return minWidthVW;
     }
-    return widthInVW + "vw";
+
+    return Math.min(shadowDivWidthInVW, maxWidthInVW) + "vw";
   }
 
   return (
     <>
-      <input style={{ width }} value={value} {...rest} />
-      <div ref={shadowRef} style={styles}>
+      <input style={{ width, ...propStyles }} value={value} {...rest} />
+      <div ref={shadowRef} style={{ ...propStyles, ...shadowDivStyles }}>
         {value}
       </div>
     </>

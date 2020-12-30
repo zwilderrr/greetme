@@ -5,7 +5,7 @@ import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
 import { ExpandingInput } from "./ExpandingInput";
 
 import { setChromeStorage, getChromeStorage } from "../api/chrome-api";
-import { CHROME_KEYS } from "../constants";
+import { CHROME_KEYS, BLANK_GOAL_WIDTH, MAX_GOAL_WIDTH } from "../constants";
 import { useSkipFirstRender } from "../hooks";
 
 import "./Goals.css";
@@ -73,6 +73,8 @@ export default function Goals() {
       placeholder: "What are you striving for?",
       disabled: goalOneDisabled,
       goalCompleted: goalOneComplete,
+      maxWidthInVW: MAX_GOAL_WIDTH,
+      minWidthInVW: BLANK_GOAL_WIDTH,
       show: true,
     },
     {
@@ -82,6 +84,8 @@ export default function Goals() {
       placeholder: "Going for two?",
       disabled: goalTwoDisabled,
       goalCompleted: goalTwoComplete,
+      maxWidthInVW: MAX_GOAL_WIDTH,
+      minWidthInVW: BLANK_GOAL_WIDTH,
       show: editing || hovering || goalOne || goalTwo,
     },
   ];
@@ -125,7 +129,7 @@ function Goal({ onClick, goalCompleted, show, ...rest }) {
     // gut then the placeholder-show selector is going to expand
     // the div if goal one is less than 29vw
     <div className={goalCssClass}>
-      <div onClick={() => onClick(goalCompleted)}>
+      <div className="radio-button" onClick={() => onClick(goalCompleted)}>
         <RadioButton />
       </div>
       <ExpandingInput {...rest} />

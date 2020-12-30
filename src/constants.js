@@ -47,3 +47,4 @@ export const SETTINGS = [
 ];
 
 export const BLANK_GOAL_WIDTH = 29; // vw
+export const MAX_GOAL_WIDTH = 85; // vw

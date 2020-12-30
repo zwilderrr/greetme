@@ -3,3 +3,4 @@ multiple clicks to settings result in diff sizes
 solid color backgrounds
 goals can be focus, daily, weekly, monthly
 [x] refactor background into search and backgroundImage
+[] top bar has a weird click box area
