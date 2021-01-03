@@ -15,9 +15,7 @@
   fill: white;
 }
 
-.pin-icon,
-.rotate,
-.rotate-in:hover {
+.pin-icon:hover {
   cursor: pointer;
 }
 

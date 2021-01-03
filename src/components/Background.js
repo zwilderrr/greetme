@@ -21,15 +21,17 @@ export default function Background({
         alt=""
         onLoad={() => {
           setImageLoading(false);
-          setCurrentImage(backgroundImage);
+          // setCurrentImage(backgroundImage);
         }}
         style={{ display: "none" }}
       />
       <div
         className="background-image"
-        style={{
-          backgroundImage: `url(${currentImage})`,
-        }}
+        style={
+          {
+            // backgroundImage: `url(${currentImage})`,
+          }
+        }
       />
 
       {currentImage && !imageLoading && (

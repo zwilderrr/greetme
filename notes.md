@@ -14,3 +14,4 @@ goals can be focus, daily, weekly, monthly
 [] massive time
 [x] shadow div is too wide on the right side
 [] refactor expanding input styles
+[] map old data when initializing app. use a dataMapped flag

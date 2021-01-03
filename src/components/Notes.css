@@ -24,11 +24,13 @@
 .header {
   padding: 10px;
   justify-content: space-between;
+  align-items: center;
   display: flex;
   background: white;
   position: relative;
   z-index: 1;
   box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.25);
+  font-weight: bold;
 }
 
 .hide {
@@ -36,11 +38,12 @@
   right: -30vw;
 }
 
-.monospace {
+.monospace,
+.monospace-icon {
   font-family: "Roboto Mono";
 }
 
-.monospace,
+.monospace-icon,
 .chevron:hover {
   cursor: pointer;
 }
@@ -48,6 +51,7 @@
 .selected {
   text-decoration: overline;
 }
+
 .show {
   width: 30vw;
 }

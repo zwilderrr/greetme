@@ -32,15 +32,23 @@ prevents a line through the placeholder text */
   text-decoration: none;
 }
 
-/* align the radio button with the input */
 .radio-button {
+  /* align the radio button with the input */
   display: flex;
   margin-right: 0.2vw;
-  margin-bottom: 0.2vw;
+  margin-bottom: 0.1vw;
+}
+
+.radio-button:hover {
+  cursor: pointer;
 }
 
 .dim {
-  color: rgb(98, 98, 98);
+  color: #757575;
+}
+
+.dim:hover {
+  cursor: default;
 }
 
 .hidden {

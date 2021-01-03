@@ -60,7 +60,7 @@ export default function Time() {
   }
 
   const { hours, minutes, amPM, showSeparator } = time;
-  const separatorClass = "separator" + (showSeparator ? " hide" : "");
+  const separatorCssClass = "separator" + (showSeparator ? " hide" : "");
   return (
     // bug here. when you set to 24h time and open a new tab
     <div
@@ -68,7 +68,7 @@ export default function Time() {
       onClick={() => setStandardTime(!standardTime)}
     >
       {hours}
-      <span className={separatorClass}>:</span>
+      <span className={separatorCssClass}>:</span>
       {minutes}
       <span className="amPM">{standardTime && amPM}</span>
     </div>

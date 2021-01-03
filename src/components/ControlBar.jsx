@@ -48,7 +48,8 @@ export default function ControlBar({ toggleHide, show }) {
   }
 
   const PinIcon = saved ? PinFilled : PinOutlined;
-  const refreshIconClass = imageLoading ? "rotate" : "rotate-in";
+  const refreshIconCssClass = imageLoading ? "rotate" : "rotate-in";
+
   return (
     <div>
       <div className="control-bar">
@@ -69,8 +70,11 @@ export default function ControlBar({ toggleHide, show }) {
           <div onClick={() => query && setSaved(!saved)}>
             <PinIcon className="pin-icon" />
           </div>
-          <div onClick={() => !saved && handleFormSubmit()}>
-            <RefreshIcon className={refreshIconClass} htmlColor={"white"} />
+          <div
+            style={{ cursor: saved ? "default" : "pointer" }}
+            onClick={() => !saved && handleFormSubmit()}
+          >
+            <RefreshIcon className={refreshIconCssClass} htmlColor={"white"} />
           </div>
         </div>
 

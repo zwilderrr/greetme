@@ -28,16 +28,17 @@ export default function Notes({ showNotes, toggleHide }) {
     setChromeStorage(CHROME_KEYS.NOTES, { notes });
   }
 
-  const monospaceIconClass = "monospace" + (monospace ? " selected" : "");
-  const containerClass = "container" + (showNotes ? " show" : " hide");
-  const bodyClass = "body" + (monospace ? " monospace" : "");
+  const monospaceIconCssClass =
+    "monospace-icon" + (monospace ? " selected" : "");
+  const containerCssClass = "container" + (showNotes ? " show" : " hide");
+  const bodyCssClass = "body" + (monospace ? " monospace" : "");
 
   return (
-    <div className={containerClass}>
+    <div className={containerCssClass}>
       <div className="header">
         <div
           onClick={() => setMonospace(!monospace)}
-          className={monospaceIconClass}
+          className={monospaceIconCssClass}
         >
           {"</>"}
         </div>
@@ -49,7 +50,7 @@ export default function Notes({ showNotes, toggleHide }) {
       </div>
       <form autoComplete={false} onBlur={handleFormSubmit}>
         <textarea
-          className={bodyClass}
+          className={bodyCssClass}
           onChange={e => setNotes(e.target.value)}
           value={notes}
           maxLength={102000}

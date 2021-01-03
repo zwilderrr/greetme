@@ -131,15 +131,15 @@ function Goal({ onClick, goalCompleted, show, ...rest }) {
     : RadioButtonUncheckedIcon;
 
   const goalCssClass = show ? "goal" : "goal hidden";
+  const radioButtonCssClass = "radio-button" + (!rest.value ? " dim" : "");
 
   return (
-    // second goal is always showing when there's a first goal
-    // should only show on hover
-    // gut then the placeholder-show selector is going to expand
-    // the div if goal one is less than 29vw
     <div className={goalCssClass}>
-      <div className="radio-button" onClick={() => onClick(goalCompleted)}>
-        <RadioButton className={!rest.value && "dim"} />
+      <div
+        className={radioButtonCssClass}
+        onClick={() => onClick(goalCompleted)}
+      >
+        <RadioButton />
       </div>
       <ExpandingInput {...rest} />
     </div>
