@@ -15,7 +15,8 @@ button {
   color: white;
   background: transparent;
   transition: 0.3s;
-  font-family: "Hind Madurai";
+  font-family: "Hind Madurai", sans-serif;
+  font-size: 14px;
 }
 
 input:focus,

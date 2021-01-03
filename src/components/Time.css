@@ -1,3 +1,11 @@
+.amPM {
+  font-size: 7vw;
+}
+
+.time-container {
+  font-size: 10vw;
+}
+
 .separator {
   color: inherit;
   transition: 0.2s;

@@ -1,5 +1,5 @@
 .duration {
-  margin-right: 10px;
+  margin-right: 0.7vw;
 }
 
 .goals {
@@ -13,7 +13,7 @@
 .goals-container div,
 .goals-container svg,
 .goals-container input {
-  font-size: 2.5vw;
+  font-size: 2vw;
 }
 
 .goal {
@@ -26,10 +26,21 @@
   text-decoration: line-through;
 }
 
+/* goal two can be disabled but not have any text, so this
+prevents a line through the placeholder text */
+.goal input:placeholder-shown {
+  text-decoration: none;
+}
+
 /* align the radio button with the input */
-.goal > .radio-button {
+.radio-button {
   display: flex;
-  margin-right: 2px;
+  margin-right: 0.2vw;
+  margin-bottom: 0.2vw;
+}
+
+.dim {
+  color: rgb(98, 98, 98);
 }
 
 .hidden {

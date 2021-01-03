@@ -47,5 +47,6 @@ export const SETTINGS = [
 ];
 
 export const MAX_GOAL_WIDTH = "85vw";
-export const GOAL_ONE_PLACEHOLDER_WIDTH = "29vw";
-export const GOAL_TWO_PLACEHOLDER_WIDTH = "16.2vw";
+export const GOAL_ONE_PLACEHOLDER_WIDTH = "22.5vw";
+export const GOAL_TWO_PLACEHOLDER_WIDTH = "13vw";
+export const SEARCH_PLACEHOLDER_WIDTH = "12vw";

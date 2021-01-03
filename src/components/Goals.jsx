@@ -139,7 +139,7 @@ function Goal({ onClick, goalCompleted, show, ...rest }) {
     // the div if goal one is less than 29vw
     <div className={goalCssClass}>
       <div className="radio-button" onClick={() => onClick(goalCompleted)}>
-        <RadioButton />
+        <RadioButton className={!rest.value && "dim"} />
       </div>
       <ExpandingInput {...rest} />
     </div>

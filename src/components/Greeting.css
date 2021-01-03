@@ -2,13 +2,14 @@
   width: 90vw;
   border: solid thin transparent;
   text-align: center;
-  font-size: 6vw;
-  margin-bottom: 10px;
+  font-size: 4.5vw;
+  margin-bottom: 0.3vw;
 }
 
 .name:focus {
   border-bottom: solid thin white;
   width: 50vw;
+  margin-bottom: 1vw;
 }
 
 .name:placeholder-shown {

@@ -19,7 +19,7 @@ export function ExpandingInput({
   ...rest
 }) {
   const shadowRef = useRef(null);
-  const [width, setWidth] = useState();
+  const [width, setWidth] = useState(placeholderWidth);
 
   useEffect(() => {
     const nextWidth = getInputWidth(value, shadowRef);
@@ -31,7 +31,7 @@ export function ExpandingInput({
 
     const viewportWidth = window.innerWidth;
     const shadowDivWidth = shadowRef.current.getBoundingClientRect().width;
-    const shadowDivWidthInVW = (shadowDivWidth / viewportWidth) * 100 + 2;
+    const shadowDivWidthInVW = (shadowDivWidth / viewportWidth) * 100 + 0.2;
 
     return shadowDivWidthInVW + "vw";
   }

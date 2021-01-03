@@ -1,11 +1,31 @@
-div[class^="layout"] {
+.layout {
+  position: fixed;
+  top: 47vh;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  /* prevent highlighting */
+  user-select: none;
+}
+
+.layout-time,
+.layout-greeting,
+.layout-goals {
   position: relative;
   display: flex;
   justify-content: center;
+  left: 0;
+  right: 0;
 }
 
-.layout-greeting,
-.layout-goals,
 .layout-time {
-  top: 59vh;
+  height: 11.5vw;
+}
+
+.layout-greeting {
+  /* top: 30%; */
+}
+
+.layout-goals {
+  /* top: 50%; */
 }

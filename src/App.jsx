@@ -44,12 +44,13 @@ export default function App() {
   return (
     <>
       <ControlBar toggleHide={toggleHide} show={show} />
+      <div className="layout">
+        <div className="layout-time">{time && <Time />}</div>
 
-      <div className="layout-time">{time && <Time />}</div>
+        <div className="layout-greeting">{greeting && <Greeting />}</div>
 
-      <div className="layout-greeting">{greeting && <Greeting />}</div>
-
-      <div className="layout-goals">{goals && <Goals />}</div>
+        <div className="layout-goals">{goals && <Goals />}</div>
+      </div>
 
       <Notes showNotes={notes} toggleHide={toggleHide} />
     </>

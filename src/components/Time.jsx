@@ -70,7 +70,7 @@ export default function Time() {
       {hours}
       <span className={separatorClass}>:</span>
       {minutes}
-      {standardTime && amPM}
+      <span className="amPM">{standardTime && amPM}</span>
     </div>
   );
 }

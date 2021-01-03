@@ -7,6 +7,7 @@ import { fetchImage } from "../api/unsplash-api";
 import { CHROME_KEYS } from "../constants";
 import { PinOutlined, PinFilled } from "../pinIcons";
 import { SETTINGS } from "../constants";
+import Background from "./Background";
 import "./ControlBar.css";
 
 export default function ControlBar({ toggleHide, show }) {
@@ -47,8 +48,8 @@ export default function ControlBar({ toggleHide, show }) {
   }
 
   const PinIcon = saved ? PinFilled : PinOutlined;
-  // const refreshIconClass = imageLoading ? "rotate" : "rotate-in";
-  const refreshIconClass = imageLoading ? "rotate-in" : "rotate-in";
+  const refreshIconClass = imageLoading ? "rotate" : "rotate-in";
+  // const refreshIconClass = imageLoading ? "rotate-in" : "rotate-in";
   return (
     <div>
       <div className="control-bar">
@@ -87,37 +88,12 @@ export default function ControlBar({ toggleHide, show }) {
         </div>
       </div>
 
-      <Background {...image} setImageLoading={setImageLoading} fly={show.fly} />
+      <Background
+        {...image}
+        setImageLoading={setImageLoading}
+        imageLoading={imageLoading}
+        fly={show.fly}
+      />
     </div>
-  );
-}
-
-// put in seperate file
-function Background({
-  backgroundImage,
-  photographer,
-  profileLink,
-  downloadLocation,
-  photoLocation,
-  photoLink,
-  fly,
-  setImageLoading,
-}) {
-  return (
-    <>
-      <img
-        // src={backgroundImage}
-        alt=""
-        onLoad={() => setImageLoading(false)}
-        style={{ display: "none" }}
-      />
-      <div
-        className="background-image"
-        style={{
-          height: 200,
-          // backgroundImage: `url(${backgroundImage})`,
-        }}
-      />
-    </>
   );
 }
