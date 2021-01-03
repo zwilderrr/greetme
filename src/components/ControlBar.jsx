@@ -49,7 +49,6 @@ export default function ControlBar({ toggleHide, show }) {
 
   const PinIcon = saved ? PinFilled : PinOutlined;
   const refreshIconClass = imageLoading ? "rotate" : "rotate-in";
-  // const refreshIconClass = imageLoading ? "rotate-in" : "rotate-in";
   return (
     <div>
       <div className="control-bar">

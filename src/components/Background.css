@@ -9,3 +9,16 @@
   height: 100vh;
   animation: fade-in 0.3s ease-in-out;
 }
+
+.credit {
+  bottom: 1vw;
+  color: lightgray;
+  font-size: 14px;
+  left: 1vw;
+  position: absolute;
+}
+
+.credit a {
+  color: lightgray;
+  text-decoration: none;
+}
