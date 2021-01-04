@@ -24,6 +24,7 @@ export default function Background({
           setImageLoading(false);
           setCurrentImage(backgroundImage);
         }}
+        onError={() => setImageLoading(false)}
         style={{ display: "none" }}
       />
       <div

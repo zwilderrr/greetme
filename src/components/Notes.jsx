@@ -30,7 +30,7 @@ export default function Notes({ showNotes, toggleHide }) {
 
   const monospaceIconCssClass =
     "monospace-icon" + (monospace ? " selected" : "");
-  const containerCssClass = "container" + (showNotes ? " show" : " hide");
+  const containerCssClass = "container" + (showNotes ? " show" : " hide-notes");
   const bodyCssClass = "body" + (monospace ? " monospace" : "");
 
   return (

@@ -11,6 +11,8 @@
 }
 
 .separator {
+  position: relative;
+  bottom: 1vw;
   color: inherit;
   transition: 0.2s;
 }
