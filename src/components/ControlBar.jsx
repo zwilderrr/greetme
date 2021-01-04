@@ -75,7 +75,7 @@ export default function ControlBar({ toggleHide, show }) {
               disabled={saved}
             />
           </form>
-          <div onClick={() => query && handlePinClick()}>
+          <div onClick={() => handlePinClick()}>
             <PinIcon className="pin-icon" />
           </div>
           <div

@@ -12,7 +12,12 @@ export const getErrorImage = () => ({
 
 export const fetchImage = async imageQuery => {
   const windowWidth = window.innerWidth;
-  const url = `${URL_BASE}/?imageQuery=${imageQuery}&windowWidth=${windowWidth}&sig=${Math.random()}`; // ensure requests aren't cached
+  let url = URL_BASE;
+  if (imageQuery) {
+    url += `imageQuery=${imageQuery}&`;
+  }
+  url += `windowWidth=${windowWidth}&sig=${Math.random()}`; // ensure requests aren't cached
+
   try {
     const image = await fetch(url, {
       headers: {
