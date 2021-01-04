@@ -1,7 +1,8 @@
 import { getErrorImage } from "./api/unsplash-api";
 export const URL_BASE = "https://greetme-api-proxy.herokuapp.com/?";
+// export const URL_BASE = "http://localhost:8000/?";
 
-export const ERROR_IMAGE = {
+export const NOPE_IMAGE = {
   raw:
     "https://images.unsplash.com/photo-1573019606806-9695d0a9739d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjM4OTc4fQ",
   name: "Daniel Herron",

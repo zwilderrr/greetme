@@ -1,20 +1,19 @@
-// const URL_BASE = "http://localhost:8000";
-import { URL_BASE, ERROR_IMAGE } from "../constants";
+import { URL_BASE, NOPE_IMAGE } from "../constants";
 
 export const getErrorImage = () => ({
-  backgroundImage: `${ERROR_IMAGE.raw}&w=${window.innerWidth}`,
-  photographer: ERROR_IMAGE.name,
-  profileLink: ERROR_IMAGE.profileLink,
-  downloadLocation: ERROR_IMAGE.downloadLocation,
-  photoLocation: ERROR_IMAGE.title,
-  photoLink: ERROR_IMAGE.photoLink,
+  backgroundImage: `${NOPE_IMAGE.raw}&w=${window.innerWidth}`,
+  photographer: NOPE_IMAGE.name,
+  profileLink: NOPE_IMAGE.profileLink,
+  downloadLocation: NOPE_IMAGE.downloadLocation,
+  photoLocation: NOPE_IMAGE.title,
+  photoLink: NOPE_IMAGE.photoLink,
 });
 
-export const fetchImage = async imageQuery => {
+export const fetchImage = async query => {
   const windowWidth = window.innerWidth;
   let url = URL_BASE;
-  if (imageQuery) {
-    url += `imageQuery=${imageQuery}&`;
+  if (query) {
+    url += `query=${query}&`;
   }
   url += `windowWidth=${windowWidth}&sig=${Math.random()}`; // ensure requests aren't cached
 

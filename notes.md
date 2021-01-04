@@ -9,6 +9,7 @@
 [x] push up the radio buttons a px?
 [x] dim radio button when no text
 [x] map old data when initializing app. use a dataMapped flag
+[x] improve search results
 [] massive time
 [] refactor expanding input styles
 [] multiple clicks to settings result in diff sizes
