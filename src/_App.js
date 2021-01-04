@@ -7,7 +7,11 @@ import "./App.css";
 import { PinOutlined, PinFilled } from "./pinIcons";
 import BackgroundImage from "./BackgroundImage";
 
-import { fetchImage, sendDownloadRequest, getErrorImage } from "./API";
+import {
+  fetchImage,
+  sendDownloadRequest,
+  getErrorImage,
+} from "./api/unsplash-api";
 
 const GOAL_TIMELINES = ["today", "this week", "this month"];
 
@@ -40,7 +44,9 @@ class App extends Component {
   }
 
   componentDidMount = async () => {
+    logStorage("component did mount");
     chrome.storage.sync.get(null, res => {
+      logStorage("inside sync component did mount");
       const nextState = { shouldFetchImage: true };
       Object.keys(res).forEach(k => (nextState[k] = res[k]));
 
@@ -61,7 +67,9 @@ class App extends Component {
   };
 
   addStorageListener() {
+    logStorage("add storage listener");
     chrome.storage.onChanged.addListener(res => {
+      logStorage("inside add storage listener");
       const nextState = {};
       Object.keys(res).forEach(k => (nextState[k] = res[k]["newValue"]));
       this.setState(nextState);
@@ -77,7 +85,8 @@ class App extends Component {
   };
 
   setChromeStorage = update => {
-    chrome.storage.sync.set(update);
+    chrome.storage.sync.set(update, () => logStorage("after set update"));
+    logStorage("after after set update");
   };
 
   startClock = () => {
@@ -94,6 +103,7 @@ class App extends Component {
   }
 
   onUpdateField = async update => {
+    logStorage("on update field", update);
     if (Object.keys(update)[0] === "savedBackground") {
       if (update.savedBackground) {
         // unsplash requires a call to update the image's
@@ -236,6 +246,7 @@ class App extends Component {
   };
 
   render() {
+    logStorage("render");
     const {
       backgroundImage,
       photographer,

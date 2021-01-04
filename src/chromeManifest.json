@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
-  "name": "GreetMe - Unsplash photos, notes, tasks",
+  "name": "GreetMe - Unsplash photos, notes, goals",
   "short_name": "GreetMe",
-  "description": "Notes, tasks, and stunning Unsplash photos in your chosen category, each and every tab.",
-  "version": "0.0.11",
+  "description": "Goals, notes, and stunning Unsplash photos you choose, each and every tab.",
+  "version": "0.1.0",
   "chrome_url_overrides": {
     "newtab": "index.html"
   },

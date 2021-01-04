@@ -1,0 +1,22 @@
+.amPM {
+  font-size: 7vw;
+}
+
+.time-container {
+  font-size: 10vw;
+}
+
+.time-container:hover {
+  cursor: pointer;
+}
+
+.separator {
+  position: relative;
+  bottom: 1vw;
+  color: inherit;
+  transition: 0.2s;
+}
+
+.hide {
+  color: transparent;
+}

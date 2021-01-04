@@ -1,6 +1,26 @@
 body {
-  font-family: 'Hind Madurai', sans-serif !important;
+  color: white;
+  font-family: "Hind Madurai", sans-serif;
+  font-size: 14px;
   margin: 0;
   overflow: hidden;
-  background: gainsboro;
+  /* background: darksalmon; */
+  background: gray;
+}
+
+input,
+textarea,
+button {
+  border: none;
+  color: white;
+  background: transparent;
+  transition: 0.3s;
+  font-family: "Hind Madurai", sans-serif;
+  font-size: 14px;
+}
+
+input:focus,
+textarea:focus,
+button:focus {
+  outline: none;
 }

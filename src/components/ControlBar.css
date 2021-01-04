@@ -1,0 +1,78 @@
+.query {
+  width: 125px;
+  border: solid thin;
+  padding: 4px 10px;
+  text-overflow: ellipsis;
+  border-radius: 2px;
+  letter-spacing: 0.7px;
+}
+
+.pin-icon {
+  width: 24px;
+  height: 24px;
+  transform: rotate(40deg);
+  margin: 1px -5px 0 0;
+  fill: white;
+}
+
+.pin-icon:hover {
+  cursor: pointer;
+}
+
+.rotate {
+  animation: rotate 0.7s cubic-bezier(0, 0.5, 1, 1) infinite;
+}
+
+.rotate-in {
+  animation: rotate 0.7s cubic-bezier(0, 0.5, 1, 1) 1;
+}
+
+.search-container {
+  display: flex;
+}
+
+.search-container > * {
+  margin-right: 18px;
+}
+
+.search-container > div {
+  padding-top: 3px;
+}
+
+.settings-container {
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.7px;
+}
+
+.settings-container > div {
+  margin-right: 18px;
+}
+
+.settings-container > div:hover {
+  cursor: pointer;
+}
+
+.settings-container > div:last-child {
+  margin-right: 0;
+}
+
+.selected {
+  text-decoration: overline;
+}
+
+.control-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 16px;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}

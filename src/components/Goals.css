@@ -1,0 +1,56 @@
+.duration {
+  margin-right: 0.7vw;
+}
+
+.goals {
+  margin-top: 1px;
+}
+
+.goals-container {
+  display: flex;
+}
+
+.goals-container div,
+.goals-container svg,
+.goals-container input {
+  font-size: 2vw;
+}
+
+.goal {
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+}
+
+.goal input:disabled {
+  text-decoration: line-through;
+}
+
+/* goal two can be disabled but not have any text, so this
+prevents a line through the placeholder text */
+.goal input:placeholder-shown {
+  text-decoration: none;
+}
+
+.radio-button {
+  /* align the radio button with the input */
+  display: flex;
+  margin-right: 0.2vw;
+  margin-bottom: 0.1vw;
+}
+
+.radio-button:hover {
+  cursor: pointer;
+}
+
+.dim {
+  color: #757575;
+}
+
+.dim:hover {
+  cursor: default;
+}
+
+.hidden {
+  opacity: 0;
+}

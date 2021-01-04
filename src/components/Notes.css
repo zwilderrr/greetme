@@ -1,0 +1,57 @@
+.body {
+  width: 30vw;
+  height: 94vh;
+  resize: none;
+  padding: 12px 20px;
+  border: none;
+  box-sizing: border-box;
+  background: ghostwhite;
+  color: inherit;
+  font-family: inherit;
+}
+
+.container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  transition: 0.3s;
+  background: white;
+  color: black;
+  box-shadow: -1px 0 12px rgba(0, 0, 0, 0.25);
+}
+
+.header {
+  padding: 10px;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  background: white;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.25);
+  font-weight: bold;
+}
+
+.hide-notes {
+  width: 0vw;
+  right: -30vw;
+}
+
+.monospace,
+.monospace-icon {
+  font-family: "Roboto Mono";
+}
+
+.monospace-icon,
+.chevron:hover {
+  cursor: pointer;
+}
+
+.selected {
+  text-decoration: overline;
+}
+
+.show {
+  width: 30vw;
+}
