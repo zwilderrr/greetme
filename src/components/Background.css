@@ -22,12 +22,12 @@
   font-size: 14px;
   left: 1vw;
   position: absolute;
+  z-index: 1;
 }
 
 .credit a {
   color: lightgray;
   text-decoration: none;
-  z-index: 1;
 }
 
 .fly {

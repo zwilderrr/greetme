@@ -3,7 +3,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import { useSkipFirstRender } from "../hooks";
 import { getChromeStorage, setChromeStorage } from "../api/chrome-api";
-import { fetchImage } from "../api/unsplash-api";
+import { fetchImage, sendDownloadRequest } from "../api/unsplash-api";
 import { CHROME_KEYS } from "../constants";
 import { PinOutlined, PinFilled } from "../pinIcons";
 import { SETTINGS } from "../constants";
@@ -47,6 +47,14 @@ export default function ControlBar({ toggleHide, show }) {
     setImage(nextImage);
   }
 
+  function handlePinClick() {
+    setSaved(!saved);
+
+    if (!saved) {
+      sendDownloadRequest(image.downloadLocation);
+    }
+  }
+
   const PinIcon = saved ? PinFilled : PinOutlined;
   const refreshIconCssClass = imageLoading ? "rotate" : "rotate-in";
 
@@ -67,7 +75,7 @@ export default function ControlBar({ toggleHide, show }) {
               disabled={saved}
             />
           </form>
-          <div onClick={() => query && setSaved(!saved)}>
+          <div onClick={() => query && handlePinClick()}>
             <PinIcon className="pin-icon" />
           </div>
           <div

@@ -36,6 +36,9 @@ export const DEFAULT_STATE = {
   [CHROME_KEYS.NOTES]: { showNotes: false, notes: "", monospace: true },
   [CHROME_KEYS.FLY]: { showFly: false },
   [CHROME_KEYS.BACKGROUND]: getErrorImage(),
+  // key indicating whether or not storage needs to be mapped
+  // from v1
+  mappedFromV0: true,
 };
 
 export const SETTINGS = [
