@@ -41,15 +41,24 @@ export default function App() {
 
   const { time, greeting, goals, notes } = show;
 
+  let layoutTop = 47;
+  if (!goals || !greeting) layoutTop += 6;
+  if (!time) layoutTop -= 7;
+  layoutTop += "vh";
+
+  const goalsTop = !greeting ? "1.5vh" : "";
+
   return (
     <>
       <ControlBar toggleHide={toggleHide} show={show} />
-      <div className="layout">
+      <div className="layout" style={{ top: layoutTop }}>
         <div className="layout-time">{time && <Time />}</div>
 
         <div className="layout-greeting">{greeting && <Greeting />}</div>
 
-        <div className="layout-goals">{goals && <Goals />}</div>
+        <div className="layout-goals" style={{ top: goalsTop }}>
+          {goals && <Goals />}
+        </div>
       </div>
 
       <Notes showNotes={notes} toggleHide={toggleHide} />

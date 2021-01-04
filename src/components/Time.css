@@ -6,6 +6,10 @@
   font-size: 10vw;
 }
 
+.time-container:hover {
+  cursor: pointer;
+}
+
 .separator {
   color: inherit;
   transition: 0.2s;

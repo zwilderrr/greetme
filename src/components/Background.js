@@ -13,6 +13,7 @@ export default function Background({
   imageLoading,
 }) {
   const [currentImage, setCurrentImage] = useState("");
+  const backgroundCssClass = "background-image" + (fly ? " fly" : "");
 
   return (
     <>
@@ -21,17 +22,15 @@ export default function Background({
         alt=""
         onLoad={() => {
           setImageLoading(false);
-          // setCurrentImage(backgroundImage);
+          setCurrentImage(backgroundImage);
         }}
         style={{ display: "none" }}
       />
       <div
-        className="background-image"
-        style={
-          {
-            // backgroundImage: `url(${currentImage})`,
-          }
-        }
+        className={backgroundCssClass + " fade-in"}
+        style={{
+          backgroundImage: `url(${currentImage})`,
+        }}
       />
 
       {currentImage && !imageLoading && (

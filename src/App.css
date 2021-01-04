@@ -6,6 +6,7 @@
   right: 0;
   /* prevent highlighting */
   user-select: none;
+  transition: 0.3s;
 }
 
 .layout-time,
@@ -20,12 +21,4 @@
 
 .layout-time {
   height: 11.5vw;
-}
-
-.layout-greeting {
-  /* top: 30%; */
-}
-
-.layout-goals {
-  /* top: 50%; */
 }
