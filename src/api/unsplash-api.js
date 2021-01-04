@@ -9,11 +9,11 @@ export const getErrorImage = () => ({
   photoLink: NOPE_IMAGE.photoLink,
 });
 
-export const fetchImage = async query => {
+export const fetchImage = async imageQuery => {
   const windowWidth = window.innerWidth;
-  let url = URL_BASE;
-  if (query) {
-    url += `query=${query}&`;
+  let url = URL_BASE + "/?";
+  if (imageQuery) {
+    url += `imageQuery=${imageQuery}&`;
   }
   url += `windowWidth=${windowWidth}&sig=${Math.random()}`; // ensure requests aren't cached
 

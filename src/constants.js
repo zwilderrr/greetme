@@ -1,6 +1,6 @@
 import { getErrorImage } from "./api/unsplash-api";
-export const URL_BASE = "https://greetme-api-proxy.herokuapp.com/?";
-// export const URL_BASE = "http://localhost:8000/?";
+// export const URL_BASE = "https://greetme-api-proxy.herokuapp.com";
+export const URL_BASE = "http://localhost:8000";
 
 export const NOPE_IMAGE = {
   raw:
