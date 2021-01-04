@@ -50,6 +50,7 @@ export default function Notes({ showNotes, toggleHide }) {
       </div>
       <form autoComplete={false} onBlur={handleFormSubmit}>
         <textarea
+          tabindex="-1"
           className={bodyCssClass}
           onChange={e => setNotes(e.target.value)}
           value={notes}
