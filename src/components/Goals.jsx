@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
-
 import { ExpandingInput } from "./ExpandingInput";
-
 import { setChromeStorage, getChromeStorage } from "../api/chrome-api";
 import {
   CHROME_KEYS,
   MAX_GOAL_WIDTH,
   GOAL_ONE_PLACEHOLDER_WIDTH,
   GOAL_TWO_PLACEHOLDER_WIDTH,
+  DURATIONS,
 } from "../constants";
 import { useSkipFirstRender } from "../hooks";
 
@@ -47,7 +46,7 @@ export default function Goals() {
 
   useSkipFirstRender(() => {
     handleFormSubmit();
-  }, [goalOneComplete, goalTwoComplete]);
+  }, [goalOneComplete, goalTwoComplete, duration]);
 
   function handleFormSubmit(e) {
     document.activeElement.blur();
@@ -58,7 +57,16 @@ export default function Goals() {
       goalOneComplete,
       goalTwo,
       goalTwoComplete,
+      duration,
     });
+  }
+
+  function handleToggleDuration() {
+    let nextIndex = DURATIONS.indexOf(duration) + 1;
+    if (nextIndex === DURATIONS.length) {
+      nextIndex = 0;
+    }
+    setDuration(DURATIONS[nextIndex]);
   }
 
   const goalOneDisabled = goalOneComplete;
@@ -101,7 +109,9 @@ export default function Goals() {
 
   return (
     <div className="goals-container">
-      <div className="duration">{duration}</div>
+      <div className="duration" onClick={handleToggleDuration}>
+        {duration}
+      </div>
       <div className="goals">
         <form
           // calling handleFormSubmit directly for textual changes

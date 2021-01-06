@@ -61,10 +61,12 @@ export default function Time() {
 
   const { hours, minutes, amPM, showSeparator } = time;
   const separatorCssClass = "separator" + (showSeparator ? " hide" : "");
+  const intlTimeStyles = { position: "relative", right: ".6vw" };
+
   return (
-    // bug here. when you set to 24h time and open a new tab
     <div
       className="time-container"
+      style={!standardTime ? intlTimeStyles : {}}
       onClick={() => setStandardTime(!standardTime)}
     >
       {hours}

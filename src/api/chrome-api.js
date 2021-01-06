@@ -48,6 +48,12 @@ export async function initializeChromeStorage() {
       });
     });
   }
+
+  if (!storage[CHROME_KEYS.GOALS].duration) {
+    const duration = "today";
+    await setChromeStorage(CHROME_KEYS.GOALS, { duration });
+    console.log("duration added");
+  }
 }
 
 function clearChromeStorage() {
@@ -90,6 +96,7 @@ function mapStorage(oldStorage) {
       goalOneComplete: goalOneCompleted,
       goalTwo,
       goalTwoComplete: goalTwoCompleted,
+      duration: "today",
     },
     [CHROME_KEYS.SEARCH]: { query: imageQuery, saved: savedBackground },
     [CHROME_KEYS.NOTES]: { showNotes, notes, monospace },

@@ -39,7 +39,8 @@ prevents a line through the placeholder text */
   margin-bottom: 0.1vw;
 }
 
-.radio-button:hover {
+.radio-button,
+.duration:hover {
   cursor: pointer;
 }
 
