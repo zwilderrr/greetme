@@ -55,6 +55,13 @@ export default function ControlBar({ toggleHide, show }) {
     }
   }
 
+  function handleRefreshClick() {
+    if (!saved) {
+      setTimeout(() => !imageLoading && setImageLoading(false), 5000);
+      handleFormSubmit();
+    }
+  }
+
   const PinIcon = saved ? PinFilled : PinOutlined;
   const refreshIconCssClass = imageLoading ? "rotate" : "rotate-in";
 
@@ -75,12 +82,12 @@ export default function ControlBar({ toggleHide, show }) {
               disabled={saved}
             />
           </form>
-          <div onClick={() => handlePinClick()}>
+          <div onClick={handlePinClick}>
             <PinIcon className="pin-icon" />
           </div>
           <div
             style={{ cursor: saved ? "default" : "pointer" }}
-            onClick={() => !saved && handleFormSubmit()}
+            onClick={handleRefreshClick}
           >
             <RefreshIcon className={refreshIconCssClass} htmlColor={"white"} />
           </div>
