@@ -19,6 +19,7 @@ export const CHROME_KEYS = {
   NOTES: "notes",
   TIME: "time",
   GREETING: "greeting",
+  SERIF: "serif",
   FLY: "fly",
 };
 
@@ -46,13 +47,20 @@ export const SETTINGS = [
   CHROME_KEYS.GREETING,
   CHROME_KEYS.TIME,
   CHROME_KEYS.GOALS,
+  CHROME_KEYS.SERIF,
   CHROME_KEYS.FLY,
   CHROME_KEYS.NOTES,
 ];
 
-export const MAX_GOAL_WIDTH = "85vw";
-export const GOAL_ONE_PLACEHOLDER_WIDTH = "22.5vw";
-export const GOAL_TWO_PLACEHOLDER_WIDTH = "13vw";
-export const SEARCH_PLACEHOLDER_WIDTH = "12vw";
+export const PLACEHOLDER_WIDTH = {
+  MAX_GOAL: "85vw",
+  GOAL_ONE: "22.5vw",
+  GOAL_ONE_SERIF: "25.5vw",
+  GOAL_TWO: "13vw",
+  GOAL_TWO_SERIF: "14.5vw",
+  SEARCH: "12vw",
+};
 
 export const DURATIONS = ["today", "this week", "this month"];
+
+export const SERIF_FONT_FAMILY = "Noto Serif";
