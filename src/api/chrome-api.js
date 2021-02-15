@@ -21,7 +21,7 @@ export async function setChromeStorage(key, update) {
   const next = { ...current, ...update };
   return new Promise(resolve => {
     chrome.storage.sync.set({ [key]: { ...next } }, () => {
-      logStorage();
+      // logStorage();
       resolve();
     });
   });

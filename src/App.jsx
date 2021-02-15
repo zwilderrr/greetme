@@ -39,7 +39,7 @@ export default function App() {
     }));
   }
 
-  const { time, greeting, goals, notes } = show;
+  const { time, greeting, goals, serif, notes } = show;
 
   let layoutTop = 47;
   if (!goals || !greeting) layoutTop += 6;
@@ -48,20 +48,24 @@ export default function App() {
 
   const goalsTop = !greeting ? "1.5vh" : "";
 
+  const fontCssClass = serif ? "serif" : "";
+
   return (
     <>
-      <ControlBar toggleHide={toggleHide} show={show} />
-      <div className="layout" style={{ top: layoutTop }}>
-        <div className="layout-time">{time && <Time />}</div>
+      <div className={fontCssClass}>
+        <ControlBar toggleHide={toggleHide} show={show} />
+        <div className="layout" style={{ top: layoutTop }}>
+          <div className="layout-time">{time && <Time />}</div>
 
-        <div className="layout-greeting">{greeting && <Greeting />}</div>
+          <div className="layout-greeting">{greeting && <Greeting />}</div>
 
-        <div className="layout-goals" style={{ top: goalsTop }}>
-          {goals && <Goals />}
+          <div className="layout-goals" style={{ top: goalsTop }}>
+            {goals && <Goals serif={serif} />}
+          </div>
         </div>
-      </div>
 
-      <Notes showNotes={notes} toggleHide={toggleHide} />
+        <Notes showNotes={notes} toggleHide={toggleHide} />
+      </div>
     </>
   );
 }

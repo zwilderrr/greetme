@@ -4,17 +4,16 @@ import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
 import { ExpandingInput } from "./ExpandingInput";
 import { setChromeStorage, getChromeStorage } from "../api/chrome-api";
 import {
+  SERIF_FONT_FAMILY,
   CHROME_KEYS,
-  MAX_GOAL_WIDTH,
-  GOAL_ONE_PLACEHOLDER_WIDTH,
-  GOAL_TWO_PLACEHOLDER_WIDTH,
+  PLACEHOLDER_WIDTH,
   DURATIONS,
 } from "../constants";
 import { useSkipFirstRender } from "../hooks";
 
 import "./Goals.css";
 
-export default function Goals() {
+export default function Goals({ serif }) {
   const [editing, setEditing] = useState(false);
   const [hovering, setHovering] = useState(false);
 
@@ -25,6 +24,14 @@ export default function Goals() {
   const [goalTwoComplete, setGoalTwoComplete] = useState(false);
 
   const [duration, setDuration] = useState("today");
+
+  const {
+    GOAL_ONE,
+    GOAL_ONE_SERIF,
+    GOAL_TWO,
+    GOAL_TWO_SERIF,
+    MAX_GOAL,
+  } = PLACEHOLDER_WIDTH;
 
   useEffect(() => {
     async function fetchData() {
@@ -86,10 +93,12 @@ export default function Goals() {
       placeholder: "What are you striving for?",
       disabled: goalOneDisabled,
       goalCompleted: goalOneComplete,
-      placeholderWidth: GOAL_ONE_PLACEHOLDER_WIDTH,
+      placeholderWidth: serif ? GOAL_ONE_SERIF : GOAL_ONE,
       styles: {
-        maxWidth: MAX_GOAL_WIDTH,
+        maxWidth: MAX_GOAL,
+        fontFamily: serif ? SERIF_FONT_FAMILY : "inherit",
       },
+      serif,
       show: true,
     },
     {
@@ -99,14 +108,19 @@ export default function Goals() {
       placeholder: "Going for two?",
       disabled: goalTwoDisabled,
       goalCompleted: goalTwoComplete,
-      placeholderWidth: GOAL_TWO_PLACEHOLDER_WIDTH,
+      placeholderWidth: serif ? GOAL_TWO_SERIF : GOAL_TWO,
       styles: {
-        maxWidth: MAX_GOAL_WIDTH,
+        maxWidth: MAX_GOAL,
+        fontFamily: serif ? SERIF_FONT_FAMILY : "inherit",
       },
+      serif,
       show: editing || goalTwo || (goalOne && hovering),
     },
   ];
 
+  // bug - when there is no text in the first goal and you
+  // completely delete the second goal, it never triggers an
+  // update
   return (
     <div className="goals-container">
       <div className="duration" onClick={handleToggleDuration}>
@@ -114,9 +128,6 @@ export default function Goals() {
       </div>
       <div className="goals">
         <form
-          // calling handleFormSubmit directly for textual changes
-          // (instead of relying on useEffect) to avoid too many
-          // consecutive calls to chrome storage
           autoComplete={false}
           onSubmit={handleFormSubmit}
           onBlur={handleFormSubmit}
@@ -135,13 +146,14 @@ export default function Goals() {
   );
 }
 
-function Goal({ onClick, goalCompleted, show, ...rest }) {
+function Goal({ onClick, goalCompleted, show, serif, ...rest }) {
   const RadioButton = goalCompleted
     ? CheckCircleOutlineIcon
     : RadioButtonUncheckedIcon;
 
   const goalCssClass = show ? "goal" : "goal hidden";
-  const radioButtonCssClass = "radio-button" + (!rest.value ? " dim" : "");
+  let radioButtonCssClass = "radio-button" + (!rest.value ? " dim" : "");
+  serif && (radioButtonCssClass += " lower");
 
   return (
     <div className={goalCssClass}>

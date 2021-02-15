@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 
 const shadowDivStyles = {
   position: "fixed",
-  bottom: "-50vh",
+  bottom: "-100vh",
   left: 0,
   whiteSpace: "nowrap",
   overflow: "hidden",
