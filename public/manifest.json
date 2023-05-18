@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	"name": "greetme",
 	"description": "Gorgeous photos you'll love, each and every tab.",
-	"version": "0.1.7",
+	"version": "0.2.7",
 	"chrome_url_overrides": {
 		"newtab": "index.html"
 	},
